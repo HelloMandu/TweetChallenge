@@ -12,6 +12,7 @@ import "./LoginContainer.scss";
 
 const LoginContainer: React.FC = () => {
     const [form, onChangeForm] = useInput({ email: "", password: "" });
+    const { email, password } = form;
     return (
         <div className="login-container">
             <h1 className="login-title">TweetChallenge</h1>
@@ -19,14 +20,14 @@ const LoginContainer: React.FC = () => {
                 <InputBox
                     type={"email"}
                     name={"email"}
-                    value={form.email}
+                    value={email}
                     placeholder={"이메일"}
                     onChange={onChangeForm}
                 />
                 <InputBox
                     type={"password"}
                     name={"password"}
-                    value={form.password}
+                    value={password}
                     placeholder={"비밀번호"}
                     onChange={onChangeForm}
                 />
