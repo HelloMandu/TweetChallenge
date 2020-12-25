@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { Login, Register } from "./pages/auth";
+import path from "./path";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './App.scss';
+
+const App: React.FC = () => {
+    return (
+        <Switch>
+            <Route path={path.auth.login} component={Login} />
+            <Route path={path.auth.register} component={Register} />
+            <Route component={() => <Redirect to="/" />} />
+        </Switch>
+    );
+};
 
 export default App;

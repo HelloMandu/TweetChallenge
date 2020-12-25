@@ -1,0 +1,51 @@
+// responsive size
+$breakpoint-mobile: 0px;
+$breakpoint-tablet: 768px;
+$breakpoint-notebook: 1024px;
+$breakpoint-desktop: 1280px;
+
+// color
+$main-color: #1877f2;
+$color-000: #000;
+$color-222: #222;
+$color-333: #333;
+$color-555: #555;
+$color-777: #777;
+$color-999: #999;
+
+$box-shadow: 0 0 0 1px #ebebeb; //?
+
+// border
+$border-ebebeb: #ebebeb;
+$border-f9f9f9: #f9f9f9;
+$border-dbdbdb: #dbdbdb;
+$border-aaa: #aaa;
+$border-radius: 6px;
+
+// display
+$main-height: 48px;
+$max-width: 1280px;
+$min-width: 320px;
+$content-width: 420px;
+$standard-border: 1px solid $border-dbdbdb;
+
+// font
+$font-size-desktop: 12px;
+$font-size-tablet: 11px;
+$font-size-mobile: 10px;
+
+$desktop12px: 1rem;
+$desktop14px: 1.167rem;
+$desktop16px: 1.333rem;
+$desktop18px: 1.5rem;
+$desktop20px: 1.667rem;
+$desktop22px: 1.833rem;
+$desktop24px: 2rem;
+$desktop26px: 2.167rem;
+$desktop28px: 2.333rem;
+$desktop30px: 2.5rem;
+$desktop32px: 2.667rem;
+$desktop34px: 2.833rem;
+
+
+

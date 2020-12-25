@@ -1,0 +1,19 @@
+@import '../../static/stylesheets/variables';
+
+html{
+    body{
+        .basic-button{
+            width: 100%;
+            height: 48px;
+            font-size: $desktop18px;
+            color: #fff;
+            background-color: $main-color;
+            border-radius: $border-radius;
+            margin: 6px 0px;
+            transition: filter .3s ease-in;
+            &:hover{
+                filter: grayscale(50%);
+            }
+        }
+    }
+}
