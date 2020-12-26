@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import cn from "classnames";
 
 import useInput from "../../hooks/useInput";
+import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
 import BasicButton from "../../components/button/BasicButton";
 import InputBox from "../../components/inputBox/InputBox";
 import DatePicker from "../../components/datepicker/DatePicker";
 
 import "./RegisterContainer.scss";
-import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
 const RegisterContainer: React.FC = () => {
     const [form, onChangeForm] = useInput({
@@ -18,20 +18,10 @@ const RegisterContainer: React.FC = () => {
         passwordConfirm: "",
     });
     const { email, name, password, passwordConfirm } = form;
-    const [birth, onChangebirth] = useInput({
-        year: new Date().getFullYear(),
-        month: 1,
-        day: 1,
-    });
-    const handleRegister = useCallback(() => {
-        console.log("가입하기");
-    }, []);
-    const onKeyDownRegister = useCallback(() => handleRegister, [
-        handleRegister,
-    ]);
 
     const [emailStatus, setEmailStatus] = useState<boolean>(false);
     useEffect(() => setEmailStatus(isEmailForm(email)), [email]);
+
     const [passwordForm, setPasswordForm] = useState<boolean>(false);
     const [samePassword, setSamePassword] = useState<boolean>(false);
     useEffect(() => setPasswordForm(isPasswordForm(password)), [password]);
@@ -42,6 +32,23 @@ const RegisterContainer: React.FC = () => {
 
     const focusing = useRef<HTMLInputElement>(null);
     useEffect(() => focusing.current?.focus(), []);
+
+    const [birth, onChangebirth] = useInput({
+        year: new Date().getFullYear(),
+        month: 1,
+        day: 1,
+    });
+    const handleRegister = useCallback(() => {
+        console.log("가입하기");
+    }, []);
+    const onKeyDownRegister = useCallback(
+        (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === "Enter") {
+                handleRegister();
+            }
+        },
+        [handleRegister]
+    );
     return (
         <div className="register-container">
             <h1 className="register-title">회원가입</h1>
