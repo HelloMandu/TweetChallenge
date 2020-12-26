@@ -15,8 +15,15 @@
         margin-right: 6px;
         background: url("../../static/asset/select.svg") no-repeat
             calc(100% - 8px) 50% transparent;
+        transition: border-color .15s ease-in;
         &:last-child {
             margin-right: 0px;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+        &:focus{
+            border-color: $main-color;
         }
     }
 }
