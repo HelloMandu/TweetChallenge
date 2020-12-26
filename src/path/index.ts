@@ -1,13 +1,16 @@
-export const API_SERVER: string = 'http://localhost:3000';
 const path: any = {
-    index: '/',
+    main: {
+        index: '/',
+        detail: '/detail',
+    },
     auth: {
         index: '/auth',
         login: '/auth/login',
         register: '/auth/register',
+        mypage: '/auth/mypage',
     },
-    api: API_SERVER + '/api/',
-    storage: API_SERVER + '/uploads/',
+    api: '/api/',
+    storage: '/uploads/',
 };
 
 export default path;

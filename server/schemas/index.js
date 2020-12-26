@@ -6,9 +6,9 @@ module.exports = () => {
             mongoose.set("debug", true);
         }
         mongoose.connect(
-            "mongodb://root:*aksen1090314@localhost:27017/admin",
+            process.env.MONGO_URI,
             {
-                dbName: "tweet-challege",
+                dbName: "tweet-challenge",
             },
             (error) => {
                 if (error) {
@@ -20,11 +20,11 @@ module.exports = () => {
         );
     };
     connect();
-    mongoose.connection.on('error', (error) => {
-        console.error("MongoDB Connection Error", error)
-    })
-    mongoose.connection.on('disconnected', (error) => {
-        console.error("MongoDB Connection Failed, Try Connection Again", error)
+    mongoose.connection.on("error", (error) => {
+        console.error("MongoDB Connection Error", error);
+    });
+    mongoose.connection.on("disconnected", (error) => {
+        console.error("MongoDB Connection Failed, Try Connection Again", error);
         connect();
-    })
+    });
 };
