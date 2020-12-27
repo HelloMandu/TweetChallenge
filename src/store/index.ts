@@ -1,11 +1,14 @@
-// import { combineReducers } from 'redux';
-// import { all } from 'redux-saga/effects';
+import { combineReducers } from 'redux';
+import { all } from '@redux-saga/core/effects';
+import user, {userSaga} from './user';
+import loading from './loading';
 
-// const rootReducer = combineReducers({
-// });
+const rootReducer = combineReducers({
+    loading, user
+});
 
-// export function* rootSaga() {
-//     yield all([]);
-// }
+export function* rootSaga() {
+    yield all([userSaga()]);
+}
 
-// export default rootReducer;
+export default rootReducer;

@@ -9,13 +9,12 @@ interface InputBoxProps {
     name?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-    ref?: React.Ref<HTMLInputElement>;
 }
 
-const InputBox: React.FC<InputBoxProps> = forwardRef(
+const InputBox = forwardRef<HTMLInputElement, InputBoxProps>(
     (
         { className, type, value, placeholder, name, onChange, onKeyDown },
-        ref?: React.Ref<HTMLInputElement>
+        ref
     ) => {
         return (
             <input

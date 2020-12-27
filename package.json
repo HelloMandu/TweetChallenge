@@ -16,6 +16,7 @@
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
     "node-sass": "4.14.1",
+    "notistack": "^1.0.3",
     "qs": "^6.9.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -54,5 +55,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "@types/react-redux": "^7.1.14",
+    "@types/redux-actions": "^2.6.1"
+  }
 }

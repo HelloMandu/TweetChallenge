@@ -1,4 +1,4 @@
-const path: any = {
+const Path: any = {
     main: {
         index: '/',
         detail: '/detail',
@@ -9,8 +9,8 @@ const path: any = {
         register: '/auth/register',
         mypage: '/auth/mypage',
     },
-    api: '/api/',
-    storage: '/uploads/',
+    api: '/api',
+    storage: '/uploads',
 };
 
-export default path;
+export default Path;

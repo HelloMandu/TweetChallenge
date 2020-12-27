@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import cn from "classnames";
 
+import { requestPostRegister } from '../../api/user';
+import Path from "../../path";
+
 import useInput from "../../hooks/useInput";
+import useNotistack from "../../hooks/useNotistack";
 import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
 import BasicButton from "../../components/button/BasicButton";
@@ -11,6 +16,8 @@ import DatePicker from "../../components/datepicker/DatePicker";
 import "./RegisterContainer.scss";
 
 const RegisterContainer: React.FC = () => {
+    const handleNotistack = useNotistack();
+    const history = useHistory();
     const [form, onChangeForm] = useInput({
         email: "",
         name: "",
@@ -30,17 +37,33 @@ const RegisterContainer: React.FC = () => {
         passwordConfirm,
     ]);
 
-    const focusing = useRef<HTMLInputElement>(null);
-    useEffect(() => focusing.current?.focus(), []);
+    const [formConfirm, setFormConfirm] = useState<boolean>(false);
+    useEffect(()=>setFormConfirm(emailStatus && passwordForm && samePassword), [emailStatus, passwordForm, samePassword])
 
     const [birth, onChangebirth] = useInput({
         year: new Date().getFullYear(),
         month: 1,
         day: 1,
     });
-    const handleRegister = useCallback(() => {
-        console.log("가입하기");
-    }, []);
+    const handleRegister = useCallback(async () => {
+        if(!formConfirm){
+            handleNotistack('입력 양식을 맞춰주세요.', 'info');
+            return;
+        }
+        const {year, month, day} = birth;
+        try{
+            const response = await requestPostRegister(name, email, password, new Date(`${year}/${month}/${day}`));
+            const { msg } = response;
+            if(msg === 'success'){
+                    handleNotistack('회원가입되었습니다.', 'success');
+                    history.push(Path.auth.login);
+            } else{
+                handleNotistack(msg, 'warning');
+            }
+        } catch(e){
+            handleNotistack('회원가입 도중 오류가 발생하였습니다.', 'error');
+        }
+    }, [birth, email, formConfirm, handleNotistack, history, name, password]);
     const onKeyDownRegister = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
@@ -49,6 +72,9 @@ const RegisterContainer: React.FC = () => {
         },
         [handleRegister]
     );
+    
+    const focusing = useRef<HTMLInputElement>(null);
+    useEffect(() => focusing.current?.focus(), []);
     return (
         <div className="register-container">
             <h1 className="register-title">회원가입</h1>
@@ -99,7 +125,7 @@ const RegisterContainer: React.FC = () => {
                     />
                     <p
                         className={cn("alert", {
-                            active: password.length && !passwordConfirm.length,
+                            active: password.length,
                             failed: !passwordForm,
                             confirm: passwordForm,
                         })}
@@ -118,7 +144,7 @@ const RegisterContainer: React.FC = () => {
                     />
                     <p
                         className={cn("alert", {
-                            active: passwordConfirm.length,
+                            active: passwordForm && passwordConfirm.length,
                             failed: !samePassword,
                             confirm: samePassword,
                         })}
