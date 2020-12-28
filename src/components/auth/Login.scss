@@ -1,0 +1,35 @@
+@import "../../static/stylesheets/variables";
+
+.login-wrapper {
+    margin: 0 auto;
+    max-width: 420px;
+    min-width: $min-width;
+    padding: 10px;
+    border: $standard-border;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);;
+    .underline{
+        width: 100%;
+        margin: 20px 0;
+        border-bottom: 1px solid;
+        border-color: $border-dbdbdb;
+    }
+}
+.register-button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    .register{
+        margin: 6px 0px;
+        background-color: #42b72a;
+        height: $main-height;
+        width: 132px;
+        color: #fff;
+        font-size: $desktop18px;
+        border-radius: $border-radius;
+        transition: filter .3s ease-in;
+        &:hover{
+            filter: grayscale(20%);
+        }
+    }
+}

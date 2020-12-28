@@ -1,23 +1,28 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
 import cn from "classnames";
-
-import { requestPostRegister } from '../../api/user';
-import Path from "../../path";
 
 import useInput from "../../hooks/useInput";
 import useNotistack from "../../hooks/useNotistack";
 import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
+import AuthWrapper from "../../components/auth/AuthWrapper";
 import BasicButton from "../../components/button/BasicButton";
 import InputBox from "../../components/inputBox/InputBox";
 import DatePicker from "../../components/datepicker/DatePicker";
 
-import "./RegisterContainer.scss";
+import "./Register.scss";
 
-const RegisterContainer: React.FC = () => {
+interface RegisterProps {
+    handleRegister: (
+        name: string,
+        email: string,
+        passowrd: string,
+        birth: Date
+    ) => Promise<void>;
+}
+
+const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
     const handleNotistack = useNotistack();
-    const history = useHistory();
     const [form, onChangeForm] = useInput({
         email: "",
         name: "",
@@ -38,46 +43,37 @@ const RegisterContainer: React.FC = () => {
     ]);
 
     const [formConfirm, setFormConfirm] = useState<boolean>(false);
-    useEffect(()=>setFormConfirm(emailStatus && passwordForm && samePassword), [emailStatus, passwordForm, samePassword])
+    useEffect(
+        () => setFormConfirm(emailStatus && passwordForm && samePassword),
+        [emailStatus, passwordForm, samePassword]
+    );
 
     const [birth, onChangebirth] = useInput({
         year: new Date().getFullYear(),
         month: 1,
         day: 1,
     });
-    const handleRegister = useCallback(async () => {
-        if(!formConfirm){
-            handleNotistack('입력 양식을 맞춰주세요.', 'info');
+    const onClickRegister = useCallback(() => {
+        if (!formConfirm) {
+            handleNotistack("입력 양식을 맞춰주세요.", "info");
             return;
         }
-        const {year, month, day} = birth;
-        try{
-            const response = await requestPostRegister(name, email, password, new Date(`${year}/${month}/${day}`));
-            const { msg } = response;
-            if(msg === 'success'){
-                    handleNotistack('회원가입되었습니다.', 'success');
-                    history.push(Path.auth.login);
-            } else{
-                handleNotistack(msg, 'warning');
-            }
-        } catch(e){
-            handleNotistack('회원가입 도중 오류가 발생하였습니다.', 'error');
-        }
-    }, [birth, email, formConfirm, handleNotistack, history, name, password]);
+        const { year, month, day } = birth;
+        handleRegister(name, email, password, new Date(`${year}/${month}/${day}`));
+    }, [birth, email, formConfirm, handleNotistack, handleRegister, name, password]);
     const onKeyDownRegister = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
-                handleRegister();
+                onClickRegister();
             }
         },
-        [handleRegister]
+        [onClickRegister]
     );
-    
+
     const focusing = useRef<HTMLInputElement>(null);
     useEffect(() => focusing.current?.focus(), []);
     return (
-        <div className="register-container">
-            <h1 className="register-title">회원가입</h1>
+        <AuthWrapper title={"회원가입"}>
             <div className="register-wrapper">
                 <section>
                     <h3>이름</h3>
@@ -162,12 +158,12 @@ const RegisterContainer: React.FC = () => {
                     <BasicButton
                         className={"signup"}
                         title={"가입하기"}
-                        onClick={handleRegister}
+                        onClick={onClickRegister}
                     />
                 </div>
             </div>
-        </div>
+        </AuthWrapper>
     );
 };
 
-export default RegisterContainer;
+export default Register;

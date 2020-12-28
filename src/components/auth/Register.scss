@@ -1,0 +1,51 @@
+@import "../../static/stylesheets/variables";
+.register-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 420px;
+    min-width: $min-width;
+    width: 100%;
+    padding: 10px;
+    border: $standard-border;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    section {
+        width: 100%;
+        margin: 8px 0px;
+    }
+    .signup-wrapper {
+        display: flex;
+        justify-content: center;
+        .signup {
+            margin: 6px 0px;
+            background-color: #42b72a;
+            height: $main-height;
+            width: 132px;
+            color: #fff;
+            font-size: $desktop18px;
+            border-radius: $border-radius;
+            transition: filter 0.3s ease-in;
+            &:hover {
+                filter: grayscale(20%);
+            }
+        }
+    }
+    .alert {
+        margin-left: 10px;
+        overflow: hidden;
+        height: 0px;
+        transition: height 0.15s ease-in;
+        &.active {
+            height: 16px;
+        }
+        &.failed{
+            color: red;
+        }
+        &.confirm{
+            color: green;
+        }
+    }
+
+}

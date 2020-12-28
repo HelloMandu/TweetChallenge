@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import Path from "./path";
 import { getUser } from './store/user';
 
-import MainPage from './pages/MainPage';
-import DetailPage from './pages/DetailPage';
-import AuthPage from './pages/auth/AuthPage';
+import MainContainer from './pages/MainContainer';
+import DetailContainer from './pages/DetailContainer';
+import AuthContainer from './pages/auth/AuthContainer';
 
 import './App.scss';
 
@@ -22,9 +22,9 @@ const App: React.FC = () => {
     useEffect(judgementUser, [judgementUser])
     return (
         <Switch>
-            <Route path={Path.main.index} component={MainPage} exact />
-            <Route path={Path.main.detail} component={DetailPage} />
-            <Route path={Path.auth.index} component={AuthPage} />
+            <Route path={Path.main.index} component={MainContainer} exact />
+            <Route path={Path.main.detail} component={DetailContainer} />
+            <Route path={Path.auth.index} component={AuthContainer} />
             <Route component={() => <Redirect to="/" />} />
         </Switch>
     );

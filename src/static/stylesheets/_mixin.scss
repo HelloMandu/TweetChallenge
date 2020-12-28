@@ -22,7 +22,7 @@
     }
 }
 
-@mixin container {
+@mixin wrapper {
     max-width: $max-width;
     height: 100vh;
     margin: 0 auto;

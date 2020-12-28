@@ -1,0 +1,15 @@
+@import "../../static/stylesheets/variables";
+@import "../../static/stylesheets/mixin";
+
+.auth-wrapper {
+    @include wrapper();
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .auth-title{
+        text-align: center;
+        margin-bottom: 24px;
+        color: $main-color;
+    }
+}
