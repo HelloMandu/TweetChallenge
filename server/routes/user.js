@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     }
     try {
         const [existUser] = await User.find({ email }).exec();
-        if (!existUser) {
+        if (existUser) {
             return res.status(202).send({ msg: "이미 가입한 이메일입니다." });
         }
         const hashedPassoword = await bcrypt.hash(password, 12);
@@ -36,6 +36,7 @@ router.post("/", async (req, res) => {
             password: hashedPassoword,
             name,
             birth: new Date(birth),
+            profile: "images/profile.png",
         });
         const created = await newUser.save();
         if (!created) {
@@ -55,7 +56,8 @@ router.get("/", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
-        res.status(200).json({ msg: "success", user });
+        const { email, name, birth, profile } = user;
+        res.status(200).json({ msg: "success", user: { email, name, birth, profile } });
     } catch (e) {
         res.status(500).send(e);
     }

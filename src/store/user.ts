@@ -21,12 +21,12 @@ export const updateUser = createAction(UPDATE_USER, (target: string, value: stri
 }));
 export const deleteUser = createAction(DELETE_USER, (token: string) => token);
 
-type userAction =
+type UserAction =
     | ReturnType<typeof getUser>
     | ReturnType<typeof updateUser>
     | ReturnType<typeof deleteUser>
 
-function* getUserSaga(action: userAction) {
+function* getUserSaga(action: UserAction) {
     yield put(startLoading(GET_USER));
     try {
         const JWT_TOKEN: string = action.payload;
@@ -48,7 +48,7 @@ function* getUserSaga(action: userAction) {
     yield put(finishLoading(GET_USER));
 };
 
-function* deleteUserSaga(action: userAction) {
+function* deleteUserSaga(action: UserAction) {
     yield put(startLoading(DELETE_USER));
     try {
         const JWT_TOKEN: string = action.payload
@@ -56,6 +56,7 @@ function* deleteUserSaga(action: userAction) {
         yield call(requestPostLogout, JWT_TOKEN);
         yield put({
             type: DELETE_USER_SUCCESS,
+            payload: null
         });
     } catch (e) {
         yield put({
@@ -72,19 +73,35 @@ export function* userSaga() {
     yield takeLatest(DELETE_USER, deleteUserSaga);
 };
 
-const initialState = {};
+export interface UserState {
+    email: string | null,
+    name: string | null,
+    birth: Date | null,
+    profile: string | null
+}
 
+const initialState: UserState = {
+    email: null,
+    name: null,
+    birth: null,
+    profile: null
+}
 const user = handleActions(
     {
-        [GET_USER_SUCCESS]: (state, action: userAction) => ({
-            ...state,
-            ...action.payload.user
-        }),
-        [UPDATE_USER]: (state, action: userAction) => ({
+        [GET_USER_SUCCESS]: (state: UserState, action: UserAction) => ({
             ...state,
             ...action.payload
         }),
-        [DELETE_USER_SUCCESS]: (state, action: userAction) => ({})
+        [UPDATE_USER]: (state: UserState, action: UserAction) => ({
+            ...state,
+            ...action.payload
+        }),
+        [DELETE_USER_SUCCESS]: (state: UserState, action: UserAction) => ({
+            email: null,
+            name: null,
+            birth: null,
+            profile: null
+        })
     },
     initialState
 );

@@ -1,3 +1,5 @@
+export const API_SERVER = 'http://localhost:8080';
+
 const Path: any = {
     main: {
         index: '/',
@@ -10,7 +12,6 @@ const Path: any = {
         mypage: '/auth/mypage',
     },
     api: '/api',
-    storage: '/uploads',
 };
 
 export default Path;

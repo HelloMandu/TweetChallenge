@@ -1,10 +1,12 @@
 import React from "react";
-import NavContainer from "../container/NavContainer";
+import AsideWrapper from "../components/aside/AsideWrapper";
+import HeaderContainer from "../container/HeaderContainer";
 
 const MainContainer: React.FC = () => {
     return (
         <div>
-            <NavContainer/>
+            <HeaderContainer/>
+            <AsideWrapper/>
         </div>
     );
 };

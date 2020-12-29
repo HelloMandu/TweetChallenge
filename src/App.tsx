@@ -14,7 +14,7 @@ import './App.scss';
 const App: React.FC = () => {
     const dispatch = useDispatch();
     const judgementUser = useCallback(() => {
-        const JWT_TOKEN = localStorage.getItem('user');
+        const JWT_TOKEN = sessionStorage.getItem('user');
         if (JWT_TOKEN) {
             dispatch(getUser(JWT_TOKEN));
         }

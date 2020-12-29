@@ -1,0 +1,40 @@
+@import '../../static/stylesheets/variables';
+
+.header{
+    padding: 0 18px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    .header-wrapper{
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: $header-height;
+        background-color: #fff;
+        transition: all 0.15s ease-in;
+        color: $main-color;
+        .my-link{
+            height: 100%;
+            .my-image{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+            .my-name{
+                color: #222;
+                font-weight: bold;
+                font-size: $font-size-16px;
+                width: 80px;
+            }
+        }
+        .auth-link{
+            .login-link{
+                font-weight: bold;
+            }
+            .register-link{
+                font-weight: bold;
+                margin-left: 10px;
+            }
+        }
+    }
+
+}

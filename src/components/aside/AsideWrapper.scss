@@ -1,0 +1,35 @@
+@import '../../static/stylesheets/variables';
+
+.aside-wrapper{
+    height: 100vh;
+    background-color: #fff;
+    width: 240px;
+    padding: 18px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    .profile{
+        img{
+            width: 100%;
+            border-radius: 50%;
+        }
+        .profile-name{
+            text-align: center;
+            width: 100%;
+            font-size: $font-size-16px;
+            font-weight: bold;
+        }
+        .profile-email{
+            text-align: center;
+            width: 100%;
+        }
+    }
+    .my-challenge-list{
+        width: 100%;
+        .my-challenge-item{
+            .challenge-profile{
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+            }
+        }
+    }
+}

@@ -20,10 +20,14 @@ const userSchema = new Schema({
         type: Date,
         required: true,
     },
-    createdAt:{
+    profile: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
