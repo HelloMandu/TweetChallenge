@@ -55,6 +55,70 @@ const AsideWrapper: React.FC = () => {
                     />
                     <span>아침 08:00시 일어나기</span>
                 </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
+                <li className={"my-challenge-item"}>
+                    <img
+                        className={"challenge-profile"}
+                        src={`${API_SERVER}/images/profile.png`}
+                        alt="challenge"
+                    />
+                    <span>아침 08:00시 일어나기</span>
+                </li>
             </ul>
         </aside>
     );
