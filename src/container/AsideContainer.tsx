@@ -1,9 +1,13 @@
 import React from "react";
 import AsideWrapper from "../components/aside/AsideWrapper";
 
-const AsideContainer: React.FC = () => {
+interface AsideContainerProps{
+    isOn: boolean
+}
+
+const AsideContainer: React.FC<AsideContainerProps> = ({isOn}) => {
     return (
-        <AsideWrapper>
+        <AsideWrapper isOn={isOn}>
         </AsideWrapper>
     );
 };

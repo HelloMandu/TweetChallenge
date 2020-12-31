@@ -10,7 +10,7 @@ import MenuIcon from "../../static/asset/MenuIcon";
 import "./Header.scss";
 
 interface MenuProps {
-    onToggle?: () => void;
+    onToggle: () => void;
 }
 
 const Menu: React.FC<MenuProps> = ({ onToggle }) => {
@@ -54,15 +54,16 @@ const AuthLink: React.FC = () => {
     );
 };
 
-interface UserProps {
+interface HeaderProps {
     user: UserState | null;
+    toggleAside: () => void;
 }
 
-const Header: React.FC<UserProps> = ({ user }) => {
+const Header: React.FC<HeaderProps> = ({ user, toggleAside }) => {
     return (
         <header className={"header"}>
             <div className={"header-wrapper"}>
-                <Menu></Menu>
+                <Menu onToggle={toggleAside}></Menu>
                 <h1>TweetChallenge</h1>
                 {user ? (
                     <AuthState name={user.name} profile={user.profile} />
