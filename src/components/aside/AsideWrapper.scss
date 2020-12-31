@@ -1,12 +1,13 @@
 @import '../../static/stylesheets/variables';
 
 .aside-wrapper{
-    height: 100vh;
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
     background-color: #fff;
     width: 240px;
-    padding: 18px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     .profile{
+        padding: 8px 16px;
         img{
             width: 100%;
             border-radius: 50%;
@@ -22,13 +23,29 @@
             width: 100%;
         }
     }
+    h2{
+        text-align: center;
+        color: $main-color;
+        margin-bottom: 8px;
+    }
     .my-challenge-list{
         width: 100%;
         .my-challenge-item{
+            vertical-align: middle;
+            padding: 4px 8px;
+            border-bottom: $standard-border;
             .challenge-profile{
-                width: 48px;
-                height: 48px;
+                display: inline-block;
+                width: 32px;
+                height: 32px;
                 border-radius: 50%;
+            }
+            &:first-child{
+                border-top: $standard-border;
+            }
+            span{
+                height: inherit;
+                line-height: inherit;
             }
         }
     }
