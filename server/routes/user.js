@@ -2,14 +2,25 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const multer = require('multer');
 
 const verifyToken = require("./middleware/verifyToken");
 const omissionChecker = require("../lib/omissionChecker");
 
 const User = require("../schemas/user");
 
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'images/'); // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
+    },
+    filename: function (req, file, callback) {
+        callback(null, new Date().valueOf() + file.originalname); // cb 콜백함수를 통해 전송된 파일 이름 설정
+    },
+});
+const upload = multer({ storage: storage });
+
 /*CREATE*/
-router.post("/", async (req, res) => {
+router.post("/", upload.single('profile'), async (req, res) => {
     const { email, password, name, birth } = req.body;
     const omissionResult = omissionChecker({
         email,
@@ -21,6 +32,7 @@ router.post("/", async (req, res) => {
         return res.status(202).send({ msg: omissionResult.message });
     }
     try {
+        const profile = req.file ? req.file.path : "images/profile.png";
         const [existUser] = await User.find({ email }).exec();
         if (existUser) {
             return res.status(202).send({ msg: "이미 가입한 이메일입니다." });
@@ -36,7 +48,7 @@ router.post("/", async (req, res) => {
             password: hashedPassoword,
             name,
             birth: new Date(birth),
-            profile: "images/profile.png",
+            profile,
         });
         const created = await newUser.save();
         if (!created) {

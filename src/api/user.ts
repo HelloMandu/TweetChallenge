@@ -1,5 +1,6 @@
 import axios from "axios";
 import Path from "../path";
+import makeFormData from '../lib/makeFormData';
 
 export const requestGetUserInfo = async (JWT_TOKEN: string) => {
     const URL = Path.api + '/user';
@@ -12,9 +13,15 @@ export const requestGetUserInfo = async (JWT_TOKEN: string) => {
     return response.data;
 }
 
-export const requestPostRegister = async (name: string, email: string, password: string, birth: Date) => {
+export const requestPostRegister = async (profile: File | null, name: string, email: string, password: string, birth: Date) => {
     const URL = Path.api + '/user';
-    const response = await axios.post(URL, { name, email, password, birth });
+    const options = {
+        headers: {
+            ContentType: 'multipart/form-data',
+        }
+    }
+    const formData = makeFormData({profile, name, email, password, birth});
+    const response = await axios.post(URL, formData, options);
     return response.data;
 }
 

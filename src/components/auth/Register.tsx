@@ -9,11 +9,13 @@ import AuthWrapper from "../../components/auth/AuthWrapper";
 import BasicButton from "../../components/button/BasicButton";
 import InputBox from "../../components/inputBox/InputBox";
 import DatePicker from "../../components/datepicker/DatePicker";
+import RegisterProfile from "./RegisterProfile";
 
 import "./Register.scss";
 
 interface RegisterProps {
     handleRegister: (
+        profile: File | null,
         name: string,
         email: string,
         passowrd: string,
@@ -53,14 +55,28 @@ const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
         month: 1,
         day: 1,
     });
+
+    const [profile, setProfile] = useState<File | null>(null);
+
+    const onChangeProfile = useCallback(
+        (e) => setProfile(e.target.files[0]),
+        []
+    );
+
     const onClickRegister = useCallback(() => {
         if (!formConfirm) {
             handleNotistack("입력 양식을 맞춰주세요.", "info");
             return;
         }
         const { year, month, day } = birth;
-        handleRegister(name, email, password, new Date(`${year}/${month}/${day}`));
-    }, [birth, email, formConfirm, handleNotistack, handleRegister, name, password]);
+        handleRegister(
+            profile,
+            name,
+            email,
+            password,
+            new Date(`${year}/${month}/${day}`)
+        );
+    }, [birth, email, formConfirm, handleNotistack, handleRegister, name, password, profile]);
     const onKeyDownRegister = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
@@ -75,6 +91,7 @@ const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
     return (
         <AuthWrapper title={"회원가입"}>
             <div className="register-wrapper">
+                <RegisterProfile profile={profile} onChangeProfile={onChangeProfile} />
                 <section>
                     <h3>이름</h3>
                     <InputBox

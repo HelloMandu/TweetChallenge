@@ -1,12 +1,11 @@
 @import "../../static/stylesheets/variables";
 
 .login-wrapper {
-    margin: 0 auto;
     max-width: 420px;
     min-width: $min-width;
     padding: 10px;
     border: $standard-border;
-    border-radius: $border-radius;
+    border-radius: $border-radius-6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);;
     .underline{
         width: 100%;
@@ -26,7 +25,7 @@
         width: 132px;
         color: #fff;
         font-size: $font-size-18px;
-        border-radius: $border-radius;
+        border-radius: $border-radius-6px;
         transition: filter .3s ease-in;
         &:hover{
             filter: grayscale(20%);

@@ -27,3 +27,11 @@
     height: 100vh;
     margin: 0 auto;
 }
+
+@mixin mouseHover {
+    cursor: pointer;
+    transition: background-color .15s ease-in;
+    &:hover{
+        background-color: $color-ebebeb;
+    }
+}

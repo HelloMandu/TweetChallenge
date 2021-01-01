@@ -1,0 +1,29 @@
+@import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
+
+h2 {
+    text-align: center;
+    color: $main-color;
+    margin-bottom: 8px;
+}
+.my-challenge-list {
+    width: 100%;
+    .my-challenge-item {
+        display: flex;
+        align-items: center;
+        padding: 4px 18px;
+        @include mouseHover();
+        .challenge-profile {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+        span {
+            overflow: hidden;
+            font-size: $font-size-16px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}

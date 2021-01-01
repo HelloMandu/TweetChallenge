@@ -15,55 +15,6 @@
         background-color: $color-999;
         border-radius: 8px;
     }
-    .profile {
-        padding: 8px 16px;
-        img {
-            width: 100%;
-            border-radius: 50%;
-        }
-        .profile-name {
-            text-align: center;
-            width: 100%;
-            font-size: $font-size-16px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        .profile-email {
-            text-align: center;
-            width: 100%;
-            margin-bottom: 4px;
-        }
-    }
-    h2 {
-        text-align: center;
-        color: $main-color;
-        margin-bottom: 8px;
-    }
-    .my-challenge-list {
-        width: 100%;
-        .my-challenge-item {
-            display: flex;
-            align-items: center;
-            padding: 4px 18px;
-            transition: background-color 0.15s ease-in;
-            cursor: pointer;
-            .challenge-profile {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                margin-right: 16px;
-            }
-            span {
-                overflow: hidden;
-                font-size: $font-size-16px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            &:hover {
-                background-color: $color-ebebeb;
-            }
-        }
-    }
 }
 .on{
     transform: translateX(0);

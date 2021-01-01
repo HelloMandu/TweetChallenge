@@ -1,8 +1,17 @@
 @import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
 
 .header{
     padding: 0 18px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow;
+    position: relative;
+    h1{
+        position: absolute;
+        color: $main-color;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
     .header-wrapper{
         margin: 0 auto;
         display: flex;
@@ -14,6 +23,9 @@
         color: $main-color;
         .my-link{
             height: 100%;
+            padding: 4px 8px;
+            border-radius: 18px;
+            @include mouseHover();
             .my-image{
                 width: 40px;
                 height: 40px;
@@ -28,11 +40,17 @@
         }
         .auth-link{
             .login-link{
+                padding: 8px 12px;
+                border-radius: 15px;
                 font-weight: bold;
+                @include mouseHover();
             }
             .register-link{
+                padding: 8px 12px;
+                border-radius: 15px;
                 font-weight: bold;
                 margin-left: 10px;
+                @include mouseHover();
             }
         }
     }

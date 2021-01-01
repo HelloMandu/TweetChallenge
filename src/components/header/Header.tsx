@@ -62,9 +62,9 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ user, toggleAside }) => {
     return (
         <header className={"header"}>
+            <h1>TweetChallenge</h1>
             <div className={"header-wrapper"}>
                 <Menu onToggle={toggleAside}></Menu>
-                <h1>TweetChallenge</h1>
                 {user ? (
                     <AuthState name={user.name} profile={user.profile} />
                 ) : (
