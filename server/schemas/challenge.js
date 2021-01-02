@@ -14,6 +14,10 @@ const challengeSchema = new Schema({
         type: String,
         required: true,
     },
+    profile:{
+        type: String,
+        required: true,
+    },
     start: {
         type: Date,
         required: true,
@@ -38,6 +42,10 @@ const challengeSchema = new Schema({
         type: ObjectId,
         required: true,
         ref: 'User'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     },
 });
 

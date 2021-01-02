@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
+const {
+    Types: { ObjectId },
+} = Schema;
 const userSchema = new Schema({
     email: {
         type: String,
@@ -24,6 +27,18 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    register_challenge: [
+        {
+            type: ObjectId,
+            ref: 'Challenge',
+        },
+    ],
+    participated_challenge: [
+        {
+            type: ObjectId,
+            ref: 'Challenge',
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now,

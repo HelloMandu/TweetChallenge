@@ -2,25 +2,15 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const multer = require('multer');
 
 const verifyToken = require("./middleware/verifyToken");
+const upload = require("./middleware/upload");
 const omissionChecker = require("../lib/omissionChecker");
 
 const User = require("../schemas/user");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, 'images/'); // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
-    },
-    filename: function (req, file, callback) {
-        callback(null, new Date().valueOf() + file.originalname); // cb 콜백함수를 통해 전송된 파일 이름 설정
-    },
-});
-const upload = multer({ storage: storage });
-
 /*CREATE*/
-router.post("/", upload.single('profile'), async (req, res) => {
+router.post("/", upload.single("profile"), async (req, res) => {
     const { email, password, name, birth } = req.body;
     const omissionResult = omissionChecker({
         email,
@@ -69,7 +59,36 @@ router.get("/", verifyToken, async (req, res) => {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
         const { email, name, birth, profile } = user;
-        res.status(200).json({ msg: "success", user: { email, name, birth, profile } });
+        res.status(200).json({
+            msg: "success",
+            user: { email, name, birth, profile },
+        });
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+/*Read*/
+router.put("/", verifyToken, async (req, res) => {
+    const { _id } = req.decodeToken;
+    try {
+        const user = await User.findById(_id).exec();
+        if (!user) {
+            return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
+        }
+        const { email, name, birth, profile } = user;
+        const updated = await User.findByIdAndUpdate(_id, {
+            email,
+            name,
+            birth,
+            profile,
+        });
+        if (!updated) {
+            return res
+                .status(202)
+                .send({ msg: "개인정보 수정에 실패하였습니다." });
+        }
+        res.status(200).json({ msg: "success" });
     } catch (e) {
         res.status(500).send(e);
     }
@@ -112,9 +131,9 @@ router.post("/signin", async (req, res, next) => {
 
 /*Logout*/
 router.post("/logout", verifyToken, async (req, res, next) => {
-    const { _id, email } = req.decodeToken; // JWT_TOKEN에서 추출한 값 가져옴
+    const { _id } = req.decodeToken; // JWT_TOKEN에서 추출한 값 가져옴
     try {
-        const [existUser] = await User.find({ _id, email }).exec();
+        const existUser = await User.findById(_id).exec();
         if (!existUser) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
