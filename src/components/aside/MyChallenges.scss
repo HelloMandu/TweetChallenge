@@ -2,9 +2,11 @@
 @import '../../static/stylesheets/mixin';
 
 h2 {
+    width: $aside-width;
     text-align: center;
     color: $main-color;
     margin-bottom: 8px;
+    white-space: nowrap;
 }
 .my-challenge-list {
     width: 100%;

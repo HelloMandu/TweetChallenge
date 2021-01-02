@@ -8,14 +8,14 @@ import { requestPostSignin } from "../../api/user";
 
 import useNotistack from "../../hooks/useNotistack";
 
-import Login from "../../components/auth/Login";
+import Signin from "../../components/auth/Signin";
 
-const LoginContainer: React.FC = () => {
+const SigninContainer: React.FC = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const handleNotistack = useNotistack();
 
-    const handleLogin = useCallback(
+    const handleSignin = useCallback(
         async (email: string, password: string) => {
             try {
                 const { msg, token } = await requestPostSignin(email, password);
@@ -40,7 +40,7 @@ const LoginContainer: React.FC = () => {
             history.replace(Path.main.index);
         }
     }, [JWT_TOKEN, history]);
-    return <Login handleLogin={handleLogin} />;
+    return <Signin handleSignin={handleSignin} />;
 };
 
-export default LoginContainer;
+export default SigninContainer;

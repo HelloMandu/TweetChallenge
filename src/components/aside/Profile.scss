@@ -1,32 +1,35 @@
 @import '../../static/stylesheets/variables';
 @import '../../static/stylesheets/mixin';
 
-.profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px 16px;
-    margin: 8px;
-    margin-bottom: 16px;
-    border-radius: 15px;
-    @include mouseHover();
-    img {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        margin-bottom: 8px;
-    }
-    .profile-text{
-        text-align: center;
-        font-size: $font-size-16px;
+.profile-wrapper{
+    width: $aside-width;
+    padding: 16px;
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
-        margin-bottom: 4px;
-    }
-    .name {
-        font-size: $font-size-18px;
-        font-weight: bold;
-    }
-    .email {
-        text-align: center;
+        padding: 16px 24px;
+        border-radius: 15px;
+        @include mouseHover();
+        img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+        .profile-text{
+            text-align: center;
+            font-size: $font-size-16px;
+            width: 100%;
+            margin-bottom: 4px;
+        }
+        .name {
+            font-size: $font-size-18px;
+            font-weight: bold;
+        }
+        .email {
+            text-align: center;
+        }
     }
 }

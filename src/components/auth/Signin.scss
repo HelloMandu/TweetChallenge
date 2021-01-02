@@ -1,12 +1,11 @@
 @import "../../static/stylesheets/variables";
 
-.login-wrapper {
+.signin-wrapper {
     max-width: 420px;
-    min-width: $min-width;
     padding: 10px;
     border: $standard-border;
     border-radius: $border-radius-6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
     .underline{
         width: 100%;
         margin: 20px 0;
@@ -14,7 +13,7 @@
         border-color: $border-dbdbdb;
     }
 }
-.register-button{
+.signup-button{
     display: flex;
     justify-content: center;
     margin-bottom: 16px;

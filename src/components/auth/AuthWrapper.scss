@@ -2,11 +2,14 @@
 @import "../../static/stylesheets/mixin";
 
 .auth-wrapper {
-    @include wrapper();
+    max-width: $max-width;
+    margin: 0 auto;
+    min-height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 16px;
     .auth-title{
         text-align: center;
         margin: 12px 0px;

@@ -2,16 +2,10 @@
 @import '../../static/stylesheets/mixin';
 
 .header{
+    position: fixed;
     padding: 0 18px;
     box-shadow: $box-shadow;
-    position: relative;
-    h1{
-        position: absolute;
-        color: $main-color;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+    width: 100vw;
     .header-wrapper{
         margin: 0 auto;
         display: flex;
@@ -21,6 +15,14 @@
         background-color: #fff;
         transition: all 0.15s ease-in;
         color: $main-color;
+        position: relative;
+        h1{
+            position: absolute;
+            color: $main-color;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
         .my-link{
             height: 100%;
             padding: 4px 8px;

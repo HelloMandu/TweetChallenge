@@ -1,12 +1,10 @@
 @import "../../static/stylesheets/variables";
-.register-wrapper {
+.signup-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     max-width: 420px;
-    min-width: $min-width;
-    width: 100%;
     padding: 10px;
     border: $standard-border;
     border-radius: $border-radius-6px;
@@ -15,7 +13,7 @@
         width: 100%;
         margin: 8px 0px;
     }
-    .signup-wrapper {
+    .signup-button-wrapper {
         display: flex;
         justify-content: center;
         .signup {

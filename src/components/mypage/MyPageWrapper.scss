@@ -1,0 +1,20 @@
+@import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
+
+.mypage-wrapper{
+    max-width: $breakpoint-notebook;
+    padding: 16px;
+    .myinfo-wrapper{
+        width: 100%;
+        margin: 0 auto;
+        .profile-wrapper{
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+        .info{
+            width: 100%;
+        }
+    }
+}

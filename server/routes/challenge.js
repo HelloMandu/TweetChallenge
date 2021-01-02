@@ -69,7 +69,7 @@ router.post("/participate", verifyToken, async (req, res) => {
             return res.status(202).send({ msg: "등록되지 않은 챌린지입니다." });
         }
         const updated = await User.findByIdAndUpdate(_id, {
-            $push: { participated_challenge: challengeId },
+            $push: { participated: challengeId },
         });
         if (!updated) {
             return res

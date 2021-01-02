@@ -27,13 +27,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    register_challenge: [
-        {
-            type: ObjectId,
-            ref: 'Challenge',
-        },
-    ],
-    participated_challenge: [
+    participated: [
         {
             type: ObjectId,
             ref: 'Challenge',

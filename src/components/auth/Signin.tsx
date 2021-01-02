@@ -10,13 +10,13 @@ import AuthWrapper from "./AuthWrapper";
 import InputBox from "../inputBox/InputBox";
 import BasicButton from "../button/BasicButton";
 
-import "./Login.scss";
+import "./Signin.scss";
 
-interface LoginProps {
-    handleLogin: (email: string, password: string) => Promise<void>;
+interface SigninProps {
+    handleSignin: (email: string, password: string) => Promise<void>;
 }
 
-const Login: React.FC<LoginProps> = ({ handleLogin }) => {
+const Signin: React.FC<SigninProps> = ({ handleSignin }) => {
     const [form, onChangeForm] = useInput({ email: "", password: "" });
     const { email, password } = form;
     const [emailConfirm, setEmailConfirm] = useState<boolean>(false);
@@ -41,11 +41,11 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
             passwordFocus.current?.focus();
             return;
         }
-        handleLogin(email, password);
+        handleSignin(email, password);
     }, [
         email,
         emailConfirm,
-        handleLogin,
+        handleSignin,
         handleNotistack,
         password,
         passwordConfirm,
@@ -60,7 +60,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     );
     return (
         <AuthWrapper title={"TweetChallenge"}>
-            <div className="login-wrapper">
+            <form className="signin-wrapper">
                 <InputBox
                     type={"email"}
                     name={"email"}
@@ -85,7 +85,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                     ref={loginFocus}
                 />
                 <div className={"underline"} />
-                <div className="register-button">
+                <div className="signup-button">
                     <Link to={Path.auth.register}>
                         <BasicButton
                             className={"register"}
@@ -93,9 +93,9 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                         />
                     </Link>
                 </div>
-            </div>
+            </form>
         </AuthWrapper>
     );
 };
 
-export default Login;
+export default Signin;

@@ -5,12 +5,12 @@ import { requestPostRegister } from '../../api/user';
 import useNotistack from "../../hooks/useNotistack";
 
 import Path from "../../path";
-import Register from "../../components/auth/Register";
+import Signup from "../../components/auth/Signup";
 
-const RegisterContainer: React.FC = () => {
+const SignupContainer: React.FC = () => {
     const handleNotistack = useNotistack();
     const history = useHistory();
-    const handleRegister = useCallback(async (profile: File | null, name: string, email: string, password: string, birth: Date) => {
+    const handleSignup = useCallback(async (profile: File | null, name: string, email: string, password: string, birth: Date) => {
         try{
             const response = await requestPostRegister(profile, name, email, password, birth);
             const { msg } = response;
@@ -24,7 +24,7 @@ const RegisterContainer: React.FC = () => {
             handleNotistack('회원가입 도중 오류가 발생하였습니다.', 'error');
         }
     }, [handleNotistack, history]);
-    return <Register handleRegister={handleRegister}></Register>;
+    return <Signup handleSignup={handleSignup}></Signup>;
 };
 
-export default RegisterContainer;
+export default SignupContainer;

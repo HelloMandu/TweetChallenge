@@ -5,16 +5,16 @@ import useInput from "../../hooks/useInput";
 import useNotistack from "../../hooks/useNotistack";
 import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
-import AuthWrapper from "../../components/auth/AuthWrapper";
-import BasicButton from "../../components/button/BasicButton";
-import InputBox from "../../components/inputBox/InputBox";
-import DatePicker from "../../components/datepicker/DatePicker";
+import AuthWrapper from "./AuthWrapper";
+import BasicButton from "../button/BasicButton";
+import InputBox from "../inputBox/InputBox";
+import DatePicker from "../datepicker/DatePicker";
 import RegisterProfile from "./RegisterProfile";
 
-import "./Register.scss";
+import "./Signup.scss";
 
-interface RegisterProps {
-    handleRegister: (
+interface SignupProps {
+    handleSignup: (
         profile: File | null,
         name: string,
         email: string,
@@ -23,7 +23,7 @@ interface RegisterProps {
     ) => Promise<void>;
 }
 
-const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
+const Signup: React.FC<SignupProps> = ({ handleSignup }) => {
     const handleNotistack = useNotistack();
     const [form, onChangeForm] = useInput({
         email: "",
@@ -63,34 +63,34 @@ const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
         []
     );
 
-    const onClickRegister = useCallback(() => {
+    const onSubmitRegister = useCallback(() => {
         if (!formConfirm) {
             handleNotistack("입력 양식을 맞춰주세요.", "info");
             return;
         }
         const { year, month, day } = birth;
-        handleRegister(
+        handleSignup(
             profile,
             name,
             email,
             password,
             new Date(`${year}/${month}/${day}`)
         );
-    }, [birth, email, formConfirm, handleNotistack, handleRegister, name, password, profile]);
+    }, [birth, email, formConfirm, handleNotistack, handleSignup, name, password, profile]);
     const onKeyDownRegister = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
-                onClickRegister();
+                onSubmitRegister();
             }
         },
-        [onClickRegister]
+        [onSubmitRegister]
     );
 
     const focusing = useRef<HTMLInputElement>(null);
     useEffect(() => focusing.current?.focus(), []);
     return (
         <AuthWrapper title={"회원가입"}>
-            <div className="register-wrapper">
+            <form className="signup-wrapper">
                 <RegisterProfile profile={profile} onChangeProfile={onChangeProfile} />
                 <section>
                     <h3>이름</h3>
@@ -171,16 +171,16 @@ const Register: React.FC<RegisterProps> = ({ handleRegister }) => {
                     <h3>생년월일</h3>
                     <DatePicker date={birth} onChange={onChangebirth} />
                 </section>
-                <div className="signup-wrapper">
+                <div className="signup-button-wrapper">
                     <BasicButton
                         className={"signup"}
                         title={"가입하기"}
-                        onClick={onClickRegister}
+                        onClick={onSubmitRegister}
                     />
                 </div>
-            </div>
+            </form>
         </AuthWrapper>
     );
 };
 
-export default Register;
+export default Signup;

@@ -53,3 +53,7 @@ select {
 select::-ms-expand {
     display: none; /* 화살표 없애기 for IE10, 11*/
 }
+
+.root-container{
+    padding-top: $header-height;
+}
