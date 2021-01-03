@@ -13,7 +13,7 @@ import RegisterProfile from "./RegisterProfile";
 
 import "./Signup.scss";
 
-interface SignupProps {
+export interface SignupProps {
     handleSignup: (
         profile: File | null,
         name: string,
@@ -76,7 +76,16 @@ const Signup: React.FC<SignupProps> = ({ handleSignup }) => {
             password,
             new Date(`${year}/${month}/${day}`)
         );
-    }, [birth, email, formConfirm, handleNotistack, handleSignup, name, password, profile]);
+    }, [
+        birth,
+        email,
+        formConfirm,
+        handleNotistack,
+        handleSignup,
+        name,
+        password,
+        profile,
+    ]);
     const onKeyDownRegister = useCallback(
         (e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
@@ -89,97 +98,98 @@ const Signup: React.FC<SignupProps> = ({ handleSignup }) => {
     const focusing = useRef<HTMLInputElement>(null);
     useEffect(() => focusing.current?.focus(), []);
     return (
-        <AuthWrapper title={"회원가입"}>
-            <form className="signup-wrapper">
-                <RegisterProfile profile={profile} onChangeProfile={onChangeProfile} />
-                <section>
-                    <h3>이름</h3>
-                    <InputBox
-                        type={"text"}
-                        name={"name"}
-                        value={name}
-                        placeholder={"이름을 입력해주세요."}
-                        onChange={onChangeForm}
-                        onKeyDown={onKeyDownRegister}
-                        ref={focusing}
-                    />
-                </section>
-                <section>
-                    <h3>이메일</h3>
-                    <InputBox
-                        type={"email"}
-                        name={"email"}
-                        value={email}
-                        placeholder={"이메일을 입력해주세요."}
-                        onChange={onChangeForm}
-                        onKeyDown={onKeyDownRegister}
-                    />
-                    <p
-                        className={cn("alert", {
-                            active: email.length,
-                            failed: !emailStatus,
-                            confirm: emailStatus,
-                        })}
-                    >
-                        {emailStatus
-                            ? "사용가능한 이메일 입니다."
-                            : "이메일 형식에 맞지 않습니다"}
-                    </p>
-                </section>
-                <section>
-                    <h3>비밀번호</h3>
-                    <InputBox
-                        type={"password"}
-                        name={"password"}
-                        value={password}
-                        placeholder={"비밀번호를 입력해주세요."}
-                        onChange={onChangeForm}
-                        onKeyDown={onKeyDownRegister}
-                    />
-                    <p
-                        className={cn("alert", {
-                            active: password.length,
-                            failed: !passwordForm,
-                            confirm: passwordForm,
-                        })}
-                    >
-                        {passwordForm
-                            ? "사용가능한 비밀번호 입니다."
-                            : "비밀번호 형식에 맞지 않습니다."}
-                    </p>
-                    <InputBox
-                        type={"password"}
-                        name={"passwordConfirm"}
-                        value={passwordConfirm}
-                        placeholder={"비밀번호를 재입력해주세요."}
-                        onChange={onChangeForm}
-                        onKeyDown={onKeyDownRegister}
-                    />
-                    <p
-                        className={cn("alert", {
-                            active: passwordForm && passwordConfirm.length,
-                            failed: !samePassword,
-                            confirm: samePassword,
-                        })}
-                    >
-                        {samePassword
-                            ? "비밀번호가 일치합니다."
-                            : "비밀번호가 일치하지 않습니다."}
-                    </p>
-                </section>
-                <section className="birth">
-                    <h3>생년월일</h3>
-                    <DatePicker date={birth} onChange={onChangebirth} />
-                </section>
-                <div className="signup-button-wrapper">
-                    <BasicButton
-                        className={"signup"}
-                        title={"가입하기"}
-                        onClick={onSubmitRegister}
-                    />
-                </div>
-            </form>
-        </AuthWrapper>
+        <form className="signup-wrapper">
+            <RegisterProfile
+                profile={profile}
+                onChangeProfile={onChangeProfile}
+            />
+            <section>
+                <h3>이름</h3>
+                <InputBox
+                    type={"text"}
+                    name={"name"}
+                    value={name}
+                    placeholder={"이름을 입력해주세요."}
+                    onChange={onChangeForm}
+                    onKeyDown={onKeyDownRegister}
+                    ref={focusing}
+                />
+            </section>
+            <section>
+                <h3>이메일</h3>
+                <InputBox
+                    type={"email"}
+                    name={"email"}
+                    value={email}
+                    placeholder={"이메일을 입력해주세요."}
+                    onChange={onChangeForm}
+                    onKeyDown={onKeyDownRegister}
+                />
+                <p
+                    className={cn("alert", {
+                        active: email.length,
+                        failed: !emailStatus,
+                        confirm: emailStatus,
+                    })}
+                >
+                    {emailStatus
+                        ? "사용가능한 이메일 입니다."
+                        : "이메일 형식에 맞지 않습니다"}
+                </p>
+            </section>
+            <section>
+                <h3>비밀번호</h3>
+                <InputBox
+                    type={"password"}
+                    name={"password"}
+                    value={password}
+                    placeholder={"비밀번호를 입력해주세요."}
+                    onChange={onChangeForm}
+                    onKeyDown={onKeyDownRegister}
+                />
+                <p
+                    className={cn("alert", {
+                        active: password.length,
+                        failed: !passwordForm,
+                        confirm: passwordForm,
+                    })}
+                >
+                    {passwordForm
+                        ? "사용가능한 비밀번호 입니다."
+                        : "비밀번호 형식에 맞지 않습니다."}
+                </p>
+                <InputBox
+                    type={"password"}
+                    name={"passwordConfirm"}
+                    value={passwordConfirm}
+                    placeholder={"비밀번호를 재입력해주세요."}
+                    onChange={onChangeForm}
+                    onKeyDown={onKeyDownRegister}
+                />
+                <p
+                    className={cn("alert", {
+                        active: passwordForm && passwordConfirm.length,
+                        failed: !samePassword,
+                        confirm: samePassword,
+                    })}
+                >
+                    {samePassword
+                        ? "비밀번호가 일치합니다."
+                        : "비밀번호가 일치하지 않습니다."}
+                </p>
+            </section>
+            <section className="birth">
+                <h3>생년월일</h3>
+                <DatePicker date={birth} onChange={onChangebirth} />
+            </section>
+            <div className="signup-button-wrapper">
+                <BasicButton
+                    className={"signup"}
+                    title={"가입하기"}
+                    onClick={onSubmitRegister}
+                />
+            </div>
+        </form>
     );
 };
 

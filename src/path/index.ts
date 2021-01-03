@@ -7,8 +7,8 @@ const Path: any = {
     },
     auth: {
         index: '/auth',
-        login: '/auth/login',
-        register: '/auth/register',
+        signin: '/auth/signin',
+        signup: '/auth/signup',
         mypage: '/auth/mypage',
     },
     api: '/api',

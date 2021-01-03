@@ -17,7 +17,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
             <div
                 className={"profile"}
                 onClick={() =>
-                    history.push(user ? Path.auth.mypage : Path.auth.login)
+                    history.push(user ? Path.auth.mypage : Path.auth.signin)
                 }
             >
                 <img

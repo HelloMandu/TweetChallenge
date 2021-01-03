@@ -44,10 +44,10 @@ const AuthState: React.FC<UserStateProps> = ({ name, profile }) => {
 const AuthLink: React.FC = () => {
     return (
         <div className="auth-link">
-            <Link to={Path.auth.login}>
+            <Link to={Path.auth.signin}>
                 <ButtonBase className={"login-link"}>로그인</ButtonBase>
             </Link>
-            <Link to={Path.auth.register}>
+            <Link to={Path.auth.signup}>
                 <ButtonBase className={"register-link"}>회원가입</ButtonBase>
             </Link>
         </div>
