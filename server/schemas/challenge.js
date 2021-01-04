@@ -8,7 +8,6 @@ const challengeSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true,
     },
     kind:{
         type: String,
@@ -21,22 +20,18 @@ const challengeSchema = new Schema({
     start: {
         type: Date,
         required: true,
-        unique: true,
     },
     end: {
         type: String,
         required: true,
-        unique: true,
     },
     verifyStart: {
         type: Date,
         required: true,
-        unique: true,
     },
     verifyEnd: {
         type: Date,
         required: true,
-        unique: true,
     },
     user: {
         type: ObjectId,

@@ -1,5 +1,4 @@
 import React from "react";
-import { ButtonBase } from "@material-ui/core";
 import moment from "moment";
 import "moment/locale/ko";
 
@@ -8,16 +7,12 @@ import { UserState } from "../../store/user";
 
 interface MyInfoProps {
     user: UserState;
-    onClickModify: () => void;
 }
 
-const MyInfo: React.FC<MyInfoProps> = ({ user, onClickModify }) => {
+const MyInfo: React.FC<MyInfoProps> = ({ user }) => {
     const { birth, name, email, profile } = user;
     return (
         <section className="myinfo-wrapper">
-            <ButtonBase className="myinfo-modify" onClick={onClickModify}>
-                수정하기
-            </ButtonBase>
             <div className="profile-wrapper">
                 <img
                     src={`${API_SERVER}/${

@@ -31,8 +31,8 @@ router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
             title,
             kind,
             profile: req.file.path,
-            start,
-            end,
+            start: new Date(start),
+            end: new Date(end),
             verifyStart: new Date(verifyStart),
             verifyEnd: new Date(verifyEnd),
             user: _id,
@@ -77,6 +77,25 @@ router.post("/participate", verifyToken, async (req, res) => {
                 .send({ msg: "챌린지 참여에 실패하였습니다." });
         }
         res.status(201).json({ msg: "success" });
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+router.get("/", async (req, res) => {
+    const { offset } = req.query;
+    const omissionResult = omissionChecker({
+        offset,
+    });
+    if (!omissionResult.result) {
+        return res.status(202).send({ msg: omissionResult.message });
+    }
+    try {
+        const challenges = await Challenge.find().skip(parseInt(offset)).limit(8).exec();
+        if(!challenges.length){
+            return res.status(200).json({ msg: "finish" });
+        }
+        res.status(200).json({ msg: "success", challenges });
     } catch (e) {
         res.status(500).send(e);
     }

@@ -27,15 +27,15 @@ router.post("/", upload.single("profile"), async (req, res) => {
         if (existUser) {
             return res.status(202).send({ msg: "이미 가입한 이메일입니다." });
         }
-        const hashedPassoword = await bcrypt.hash(password, 12);
-        if (!hashedPassoword) {
+        const hashedPassword = await bcrypt.hash(password, 12);
+        if (!hashedPassword) {
             return res
                 .status(202)
                 .send({ msg: "비밀번호를 설정하지 못했습니다." });
         }
         const newUser = new User({
             email,
-            password: hashedPassoword,
+            password: hashedPassword,
             name,
             birth: new Date(birth),
             profile,
@@ -50,11 +50,12 @@ router.post("/", upload.single("profile"), async (req, res) => {
     }
 });
 
-/*Read*/
+/*login*/
 router.get("/", verifyToken, async (req, res) => {
     const { _id } = req.decodeToken;
     try {
         const user = await User.findById(_id).exec();
+        console.log(_id, _id.toString());
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }

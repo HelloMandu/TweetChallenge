@@ -5,7 +5,6 @@ import useInput from "../../hooks/useInput";
 import useNotistack from "../../hooks/useNotistack";
 import { isEmailForm, isPasswordForm } from "../../lib/formatCheck";
 
-import AuthWrapper from "./AuthWrapper";
 import BasicButton from "../button/BasicButton";
 import InputBox from "../inputBox/InputBox";
 import DatePicker from "../datepicker/DatePicker";

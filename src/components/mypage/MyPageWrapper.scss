@@ -4,20 +4,10 @@
 .mypage-wrapper{
     padding: 16px;
     .myinfo-wrapper{
-        position: relative;
         max-width: $breakpoint-notebook;
         margin: 0 auto;
         border: $standard-border;
         border-radius: $border-radius-6px;
-        .myinfo-modify{
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            padding: 4px 8px;
-            border: $standard-border;
-            border-radius: $border-radius-15px;
-            @include mouseHover();
-        }
         .profile-wrapper{
             width: 100%;
             img{

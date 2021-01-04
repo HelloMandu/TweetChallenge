@@ -63,7 +63,9 @@ const Header: React.FC<HeaderProps> = ({ user, toggleAside }) => {
     return (
         <header className={"header"}>
             <div className={"header-wrapper"}>
-            <h1>TweetChallenge</h1>
+                <h1>
+                    <Link to={Path.main.index}>TweetChallenge</Link>
+                </h1>
                 <Menu onToggle={toggleAside}></Menu>
                 {user ? (
                     <AuthState name={user.name} profile={user.profile} />
