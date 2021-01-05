@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import Skeleton from "../components/skeleton/Skeleton";
+
 import { requestGetChallenges } from "../api/challenge";
 import useNotistack from "../hooks/useNotistack";
+import useLoading from "../hooks/useLoading";
+
 import MainWrapper from "../components/main/MainWrapper";
 import ChallengeList from "../components/main/Challenge";
+import MainSkeleton from "../components/skeleton/MainSkeleton";
 
 export interface ChallengeState {
     id: string;
@@ -20,16 +23,19 @@ const LIMIT: number = 8;
 
 const MainContainer: React.FC = () => {
     const handleSnackbar = useNotistack();
+    const [isLoading, onLoading, offLoading] = useLoading("main");
     const offset = useRef<number>(0);
     const [challenges, setChallenges] = useState<ChallengeState[]>([]);
     // const [isFinish, setIsFinish] = useState<boolean>(false);
     useEffect(() => {
         const getChallenges = async () => {
+            onLoading();
             try {
                 const {
                     msg,
                     challenges: newChallenges,
                 } = await requestGetChallenges(offset.current);
+
                 const newChallengeList: ChallengeState[] = newChallenges.map(
                     ({
                         _id,
@@ -64,6 +70,7 @@ const MainContainer: React.FC = () => {
             } catch (e) {
                 handleSnackbar("네트워크 상태를 확인하세요", "error");
             }
+            setTimeout(offLoading, 1000);
         };
         getChallenges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,8 +78,11 @@ const MainContainer: React.FC = () => {
     useEffect(() => console.log(challenges), [challenges]);
     return (
         <MainWrapper>
-            <ChallengeList challenges={challenges}/>
-            {/* <Skeleton /> */}
+            {isLoading ? (
+                <MainSkeleton />
+            ) : (
+                <ChallengeList challenges={challenges} />
+            )}
         </MainWrapper>
     );
 };

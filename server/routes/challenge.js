@@ -64,9 +64,11 @@ router.post("/participate", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
-        const challenge = await Challenge.findById(challengeId).exec();
+        const challenge = await Challenge.findByIdAndUpdate(challengeId, {
+            $push: { participated: _id },
+        }).exec();
         if (!challenge) {
-            return res.status(202).send({ msg: "등록되지 않은 챌린지입니다." });
+            return res.status(202).send({ msg: "챌린지 참여에 실패하였습니다." });
         }
         const updated = await User.findByIdAndUpdate(_id, {
             $push: { participated: challengeId },

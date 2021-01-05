@@ -38,6 +38,12 @@ const challengeSchema = new Schema({
         required: true,
         ref: 'User'
     },
+    participate: [
+        {
+            type: ObjectId,
+            ref: 'User',
+        },
+    ],
     createdAt: {
         type: Date,
         default: Date.now,

@@ -1,11 +1,17 @@
 import React from "react";
-import { API_SERVER } from "../../path";
+import { Link } from "react-router-dom";
+import { ButtonBase } from "@material-ui/core";
 import moment from "moment";
 import "moment/locale/ko";
+
 import { ChallengeState } from "../../pages/MainContainer";
-import { ButtonBase } from "@material-ui/core";
+
+import Path, { API_SERVER } from "../../path";
+
+import "./Challenge.scss";
 
 interface ChallengeProps {
+    id: string,
     title: string;
     kind: string;
     profile: string;
@@ -14,6 +20,7 @@ interface ChallengeProps {
 }
 
 const Challenge: React.FC<ChallengeProps> = ({
+    id,
     title,
     kind,
     profile,
@@ -21,7 +28,7 @@ const Challenge: React.FC<ChallengeProps> = ({
     end,
 }) => {
     return (
-        <ButtonBase className="challenge-content" component="div">
+        <Link to={`${Path.main.detail}/${id}`}>
             <div className="challenge-profile-wrapper">
                 <img
                     src={`${API_SERVER}/${profile}`}
@@ -41,7 +48,7 @@ const Challenge: React.FC<ChallengeProps> = ({
                     <div>{moment(new Date(end)).format("YYYY/MM/DD")}</div>
                 </div>
             </div>
-        </ButtonBase>
+        </Link>
     );
 };
 
@@ -53,15 +60,16 @@ const ChallengeList: React.FC<ChallengeListProps> = ({ challenges }) => {
     return (
         <ul className="challenge-list">
             {challenges.map(({ id, title, kind, profile, start, end }) => (
-                <li className="challenge-item" key={id}>
+                <ButtonBase className="challenge-item" key={id} component="li">
                     <Challenge
+                        id={id}
                         title={title}
                         kind={kind}
                         profile={profile}
                         start={start}
                         end={end}
                     />
-                </li>
+                </ButtonBase>
             ))}
         </ul>
     );

@@ -42,7 +42,7 @@ const SigninContainer: React.FC = () => {
         }
     }, [JWT_TOKEN, history]);
     return (
-        <AuthWrapper  title={"TweetChallenge"}>
+        <AuthWrapper>
             <Signin handleSignin={handleSignin} />
         </AuthWrapper>
     );

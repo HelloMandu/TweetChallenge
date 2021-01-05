@@ -87,8 +87,8 @@ const challenges = [
 
 module.exports = async () => {
     try{
-        const hashedPassword = await bcrypt.hash(testUser.password, 12);
-        await new User({ ...testUser, password: hashedPassword }).save();
+        // const hashedPassword = await bcrypt.hash(testUser.password, 12);
+        // await new User({ ...testUser, password: hashedPassword }).save();
         const [initUser] = await User.find({ email: testUser.email }).exec();
         const { _id } = initUser;
         challenges.forEach(async (challenge) => {

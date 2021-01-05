@@ -13,7 +13,7 @@ export const finishLoading = createAction(
     (requestType: string) => requestType
 );
 
-type loadingAction =
+export type loadingAction =
     | ReturnType<typeof startLoading>
     | ReturnType<typeof finishLoading>
 
