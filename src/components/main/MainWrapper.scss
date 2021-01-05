@@ -1,3 +1,7 @@
+@import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
+
 .main-wrapper{
     padding: 16px;
+    @include asideEffect();
 }

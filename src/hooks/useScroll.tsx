@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 
-export const useScrollEnd = (callback: () => void, dom: any) => {
+export const useScrollEnd = (callback: () => void, dom?: any) => {
     const handleScroll = useCallback(() => {
         const endPoint = dom
             ? Math.abs(dom.clientHeight + dom.scrollTop - dom.scrollHeight) < 5

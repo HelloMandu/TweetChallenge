@@ -11,21 +11,31 @@ h2 {
 .my-challenge-list {
     width: 100%;
     .my-challenge-item {
-        display: flex;
-        align-items: center;
-        padding: 4px 18px;
         @include mouseHover();
-        .challenge-profile {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            margin-right: 16px;
-        }
-        span {
-            overflow: hidden;
-            font-size: $font-size-16px;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+        .my-challenge-link{
+            display: flex;
+            padding: 4px 18px;
+            align-items: center;
+            .challenge-profile {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                margin-right: 16px;
+            }
+            .my-challenge-title {
+                overflow: hidden;
+                font-size: $font-size-16px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
         }
     }
+}
+
+.challenge-text{
+    width: $aside-width;
+    text-align: center;
+    font-size: $font-size-16px;
+    margin-bottom: 4px;
+    white-space: nowrap;
 }

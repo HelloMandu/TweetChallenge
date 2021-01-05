@@ -79,4 +79,10 @@
             }
         }
     }
+    @include tablet{
+        padding: 0 8px;
+    }
+    @include mobile{
+        padding: 0 8px;
+    }
 }

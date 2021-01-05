@@ -1,25 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ButtonBase, IconButton } from "@material-ui/core";
+import { ButtonBase } from "@material-ui/core";
 
 import { UserState } from "../../store/user";
 import Path, { API_SERVER } from "../../path";
 
-import MenuIcon from "../../static/asset/MenuIcon";
+import Menu from './Menu';
 
 import "./Header.scss";
-
-interface MenuProps {
-    onToggle: () => void;
-}
-
-const Menu: React.FC<MenuProps> = ({ onToggle }) => {
-    return (
-        <IconButton onClick={onToggle} className={"menu-button"}>
-            <MenuIcon />
-        </IconButton>
-    );
-};
 
 interface UserStateProps {
     name: string | null;

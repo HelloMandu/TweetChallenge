@@ -93,10 +93,11 @@ router.get("/", async (req, res) => {
         return res.status(202).send({ msg: omissionResult.message });
     }
     try {
-        const challenges = await Challenge.find().skip(parseInt(offset)).limit(8).exec();
-        if(!challenges.length){
+        const count = await Challenge.count();
+        if(offset >= count){
             return res.status(200).json({ msg: "finish" });
         }
+        const challenges = await Challenge.find().skip(parseInt(offset)).limit(12).exec();
         res.status(200).json({ msg: "success", challenges });
     } catch (e) {
         res.status(500).send(e);

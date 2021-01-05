@@ -1,5 +1,4 @@
-@import './variables';
-
+@import "./variables";
 
 @mixin mobile {
     @media (min-width: #{$breakpoint-mobile}) and (max-width: #{$breakpoint-tablet - 1px}) {
@@ -22,10 +21,24 @@
     }
 }
 
+@mixin asideEffect {
+    .aside-margin{
+        transition: margin .3s ease-in-out;
+    }
+    .aside {
+        @include desktop {
+            margin-left: $aside-width;
+        }
+        @include notebook {
+            margin-left: $aside-width;
+        }
+    }
+}
+
 @mixin mouseHover {
     cursor: pointer;
-    transition: background-color .15s ease-in;
-    &:hover{
+    transition: background-color 0.15s ease-in;
+    &:hover {
         background-color: $color-ebebeb;
     }
 }

@@ -8,6 +8,7 @@ const upload = require("./middleware/upload");
 const omissionChecker = require("../lib/omissionChecker");
 
 const User = require("../schemas/user");
+const Challenge = require("../schemas/challenge");
 
 /*CREATE*/
 router.post("/", upload.single("profile"), async (req, res) => {
@@ -50,26 +51,26 @@ router.post("/", upload.single("profile"), async (req, res) => {
     }
 });
 
-/*login*/
+/*myinfo*/
 router.get("/", verifyToken, async (req, res) => {
     const { _id } = req.decodeToken;
     try {
         const user = await User.findById(_id).exec();
-        console.log(_id, _id.toString());
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
+        const challenges = await Challenge.find({ user:_id }).exec();
         const { email, name, birth, profile } = user;
         res.status(200).json({
             msg: "success",
-            user: { email, name, birth, profile },
+            user: { email, name, birth, profile, challenges },
         });
     } catch (e) {
         res.status(500).send(e);
     }
 });
 
-/*Read*/
+/*update*/
 router.put("/", verifyToken, async (req, res) => {
     const { _id } = req.decodeToken;
     try {
