@@ -59,6 +59,7 @@
                     }
                 }
             }
+
             .my-link-tooltip {
                 position: absolute;
                 display: flex;
@@ -92,6 +93,13 @@
                         color: $color-999;
                     }
                 }
+            }
+            &:hover{
+                .my-link-tooltip{
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
             }
             .clicked {
                 opacity: 1;

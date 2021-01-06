@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getUser, deleteUser } from '../store/user';
 
 import useNotistack from './useNotistack';
+import useDialog from './useDialog';
 
 export const useLogin = () => {
     const dispatch = useDispatch();
@@ -17,12 +18,12 @@ export const useLogin = () => {
 export const useLogout = () => {
     const dispatch = useDispatch();
     const handleSnackbar = useNotistack();
-    // const openDialog = useDialog();
+    const openDialog = useDialog();
     const handleLogout = useCallback((JWT_TOKEN: string) => {
-        // openDialog('로그아웃', () => {
-        //     dispatch(deleteUser(JWT_TOKEN));
-        //     handleSnackbar('로그아웃 되었습니다.', 'success');
-        // }, '로그아웃 하시겠습니까?', true);
-    }, []);
+        openDialog('로그아웃', () => {
+            dispatch(deleteUser(JWT_TOKEN));
+            handleSnackbar('로그아웃 되었습니다.', 'success');
+        }, '로그아웃 하시겠습니까?', true);
+    }, [dispatch, handleSnackbar, openDialog]);
     return handleLogout;
 };

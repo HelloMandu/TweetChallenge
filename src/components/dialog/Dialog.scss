@@ -1,11 +1,10 @@
 @import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
 
 .dialog {
     width: 300px;
     overflow: hidden;
     .dialog-area {
-        display: flex;
-        justify-content: center;
         width: 100%;
         height: 100%;
         border: solid 1px #dbdbdb;
@@ -53,5 +52,8 @@
         .dialog-button {
             width: 50%;
         }
+    }
+    @include mobile{
+        width: 246px;
     }
 }

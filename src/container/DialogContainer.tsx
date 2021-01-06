@@ -18,22 +18,23 @@ const DialogContainer: React.FC = () => {
 
     const onKeyDown = useCallback(
         (e) => {
-            e.stopPropagation();
-            if (!open) {
-                return;
-            }
-            if (e.key === 'Enter') {
-                onClick();
+            if (open) {
+                if (e.key === 'Enter') {
+                    onClick();
+                } else if (e.key === 'Escape') {
+                    onClose();
+                }
+                e.stopPropagation();
             }
         },
-        [onClick, open]
+        [onClick, onClose, open]
     );
 
     useEffect(() => {
         document.addEventListener('keydown', onKeyDown, true);
         return () => document.removeEventListener('keydown', onKeyDown, true);
     }, [onKeyDown]);
-    if(!open){
+    if (!open) {
         return null;
     }
     return (

@@ -1,13 +1,11 @@
 import React from 'react';
-import { Action } from 'redux';
 import cn from 'classnames';
-/* Library */
+import { Action } from 'redux';
+
 import { Dialog as MaterialDialog } from '@material-ui/core';
 import { ButtonBase } from '@material-ui/core';
-/* Components */
 
 import './Dialog.scss';
-/* StyleSheets */
 
 interface DialogProps {
     open: boolean;
@@ -20,7 +18,7 @@ interface DialogProps {
 
 const Dialog: React.FC<DialogProps> = ({ open, title, confirm, text, onClick, onClose }) => {
     return (
-        <MaterialDialog onClose={onClick} open={open}>
+        <MaterialDialog open={open} onClose={onClose}>
             <div className={cn('dialog', { confirm })}>
                 <div className={'dialog-area'}>
                     <div className={'dialog-content'}>
@@ -33,7 +31,10 @@ const Dialog: React.FC<DialogProps> = ({ open, title, confirm, text, onClick, on
                                 아니오
                             </ButtonBase>
                         )}
-                        <ButtonBase className={cn('dialog-button', 'dialog-active')} onClick={onClick}>
+                        <ButtonBase
+                            className={cn('dialog-button', 'dialog-active')}
+                            onClick={onClick}
+                        >
                             {confirm ? '예' : '확인'}
                         </ButtonBase>
                     </div>

@@ -4,7 +4,7 @@
 
 
 .detail-content{
-    max-width: $breakpoint-notebook;
+    max-width: $breakpoint-tablet;
     margin: 0 auto;
     border: $standard-border;
     position: relative;
@@ -53,5 +53,5 @@
 }
 .participate-button-wrapper{
     margin: 8px auto;
-    max-width: $breakpoint-notebook;
+    max-width: $breakpoint-tablet;
 }

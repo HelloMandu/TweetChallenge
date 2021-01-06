@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
 import { ButtonBase } from '@material-ui/core';
@@ -28,17 +28,17 @@ const AuthState: React.FC<UserStateProps> = ({ name, profile }) => {
         }
     }, [handleLogout]);
     return (
-        <div className={'my-link-wrapper'}>
+        <div className={'my-link-wrapper'} >
             <ButtonBase className={'my-link'} onClick={toggleClicked}>
                 <img className={'my-image'} src={`${API_SERVER}/${profile}`} alt="profile" />
                 <span className={'my-name'}>{name}</span>
             </ButtonBase>
-            <div className={cn('my-link-tooltip', { clicked })}>
+            <div className={cn('my-link-tooltip', { clicked })} onBlur={() => setClicked(false)}>
                 <ButtonBase
                     className={'tooltip-button'}
                     onClick={() => {
                         history.push(Path.auth.mypage);
-                        toggleClicked();
+                        setClicked(false)
                     }}
                 >
                     마이페이지
