@@ -31,8 +31,8 @@ router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
             title,
             kind,
             profile: req.file.path,
-            start,
-            end,
+            start: new Date(start),
+            end: new Date(end),
             verifyStart: new Date(verifyStart),
             verifyEnd: new Date(verifyEnd),
             user: _id,
@@ -64,9 +64,11 @@ router.post("/participate", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
-        const challenge = await Challenge.findById(challengeId).exec();
+        const challenge = await Challenge.findByIdAndUpdate(challengeId, {
+            $push: { participated: _id },
+        }).exec();
         if (!challenge) {
-            return res.status(202).send({ msg: "등록되지 않은 챌린지입니다." });
+            return res.status(202).send({ msg: "챌린지 참여에 실패하였습니다." });
         }
         const updated = await User.findByIdAndUpdate(_id, {
             $push: { participated: challengeId },
@@ -77,6 +79,26 @@ router.post("/participate", verifyToken, async (req, res) => {
                 .send({ msg: "챌린지 참여에 실패하였습니다." });
         }
         res.status(201).json({ msg: "success" });
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+router.get("/", async (req, res) => {
+    const { offset } = req.query;
+    const omissionResult = omissionChecker({
+        offset,
+    });
+    if (!omissionResult.result) {
+        return res.status(202).send({ msg: omissionResult.message });
+    }
+    try {
+        const count = await Challenge.count();
+        if(offset >= count){
+            return res.status(200).json({ msg: "finish" });
+        }
+        const challenges = await Challenge.find().skip(parseInt(offset)).limit(12).exec();
+        res.status(200).json({ msg: "success", challenges });
     } catch (e) {
         res.status(500).send(e);
     }

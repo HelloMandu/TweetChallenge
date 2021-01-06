@@ -34,7 +34,7 @@ const App: React.FC = () => {
                         exact
                     />
                     <Route
-                        path={Path.main.detail}
+                        path={Path.main.detail + '/:id?'}
                         component={DetailContainer}
                     />
                     <Route path={Path.auth.index} component={AuthContainer} />

@@ -1,4 +1,7 @@
 import React from "react";
+import moment from "moment";
+import "moment/locale/ko";
+
 import { API_SERVER } from "../../path";
 import { UserState } from "../../store/user";
 
@@ -28,7 +31,7 @@ const MyInfo: React.FC<MyInfoProps> = ({ user }) => {
             </div>
             <div className="info">
                 <span>생년월일</span>
-                <span>{birth}</span>
+                <span>{moment(birth).format("YYYY년 MM월 DD일")}</span>
             </div>
         </section>
     );

@@ -19,7 +19,7 @@ export const getUser = createAction(GET_USER);
 export const updateUser = createAction(UPDATE_USER, (target: string, value: string | number) => ({
     [target]: value
 }));
-export const deleteUser = createAction(DELETE_USER, (token: string) => token);
+export const deleteUser = createAction(DELETE_USER, (token: string | null) => token);
 
 type UserAction =
     | ReturnType<typeof getUser>
@@ -78,13 +78,15 @@ export interface UserState {
     name: string | null,
     birth: Date | null,
     profile: string | null
+    challenges: any[]
 }
 
 const initialState: UserState = {
     email: null,
     name: null,
     birth: null,
-    profile: null
+    profile: null,
+    challenges: []
 }
 const user = handleActions(
     {
@@ -100,7 +102,8 @@ const user = handleActions(
             email: null,
             name: null,
             birth: null,
-            profile: null
+            profile: null,
+            challenges: []
         })
     },
     initialState

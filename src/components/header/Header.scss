@@ -1,12 +1,14 @@
-@import '../../static/stylesheets/variables';
-@import '../../static/stylesheets/mixin';
+@import "../../static/stylesheets/variables";
+@import "../../static/stylesheets/mixin";
 
-.header{
+.header {
     position: fixed;
     padding: 0 18px;
     box-shadow: $box-shadow;
     width: 100vw;
-    .header-wrapper{
+    z-index: 100;
+    background-color: #fff;
+    .header-wrapper {
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -16,45 +18,71 @@
         transition: all 0.15s ease-in;
         color: $main-color;
         position: relative;
-        h1{
+        h1 {
             position: absolute;
             color: $main-color;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        .my-link{
+        .my-link {
             height: 100%;
             padding: 4px 8px;
-            border-radius: 18px;
+            border-radius: $border-radius-15px;
             @include mouseHover();
-            .my-image{
+            .my-image {
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
                 margin-right: 8px;
             }
-            .my-name{
+            .my-name {
                 color: #222;
                 font-weight: bold;
                 font-size: $font-size-16px;
+
+            }
+            @include tablet {
+                .my-name{
+                    display: none;
+                }
+                .my-image{
+                    margin-right: 0px;
+                }
+            }
+            @include mobile {
+                .my-name{
+                    display: none;
+                }
+                .my-image{
+                    margin-right: 0px;
+                }
             }
         }
-        .auth-link{
-            .login-link{
+        .auth-link {
+            .login-link {
                 padding: 8px 12px;
                 border-radius: 15px;
                 font-weight: bold;
                 @include mouseHover();
             }
-            .register-link{
+            .register-link {
                 padding: 8px 12px;
                 border-radius: 15px;
                 font-weight: bold;
-                margin-left: 10px;
                 @include mouseHover();
+            }
+            @include mobile{
+                .register-link{
+                    display: none;
+                }
             }
         }
     }
-
+    @include tablet{
+        padding: 0 8px;
+    }
+    @include mobile{
+        padding: 0 8px;
+    }
 }

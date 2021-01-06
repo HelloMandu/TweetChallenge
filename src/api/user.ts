@@ -20,7 +20,7 @@ export const requestPostRegister = async (profile: File | null, name: string, em
             ContentType: 'multipart/form-data',
         }
     }
-    const formData = makeFormData({profile, name, email, password, birth});
+    const formData = makeFormData({ profile, name, email, password, birth });
     const response = await axios.post(URL, formData, options);
     return response.data;
 }
@@ -28,6 +28,19 @@ export const requestPostRegister = async (profile: File | null, name: string, em
 export const requestPostSignin = async (email: string, password: string) => {
     const URL = Path.api + '/user/signin';
     const response = await axios.post(URL, { email, password });
+    return response.data;
+}
+
+export const requestPutModifyUser = async (JWT_TOKEN: string, profile: File | null, name: string, email: string, password: string, birth: Date) => {
+    const URL = Path.api + '/user';
+    const options = {
+        headers: {
+            authorization: `Bearer ${JWT_TOKEN}`,
+            contentType: 'multipart/form-data',
+        }
+    }
+    const formData = makeFormData({ profile, name, email, password, birth });
+    const response = await axios.put(URL, formData, options);
     return response.data;
 }
 

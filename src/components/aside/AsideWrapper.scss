@@ -1,4 +1,5 @@
 @import "../../static/stylesheets/variables";
+@import "../../static/stylesheets/mixin";
 
 .aside-wrapper {
     position: fixed;
@@ -9,6 +10,7 @@
     width: 0px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     transition: all .3s ease-in-out;
+    z-index: 200;
     &::-webkit-scrollbar {
         width: 8px;
     }
@@ -16,7 +18,46 @@
         background-color: $color-999;
         border-radius: 8px;
     }
+    .menu-wrapper{
+        display: none;
+        height: $header-height;
+    }
+    .menu-icon{
+        margin-left: 16px;
+    }
+
+    @include tablet{
+        height: 100vh;
+        top: 0px;
+        height: 100vh;
+        .menu-wrapper{
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+        }
+    }
+    @include mobile{
+        height: 100vh;
+        top: 0px;
+        height: 100vh;
+        .menu-wrapper{
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+        }
+    }
 }
 .on{
     width: 240px;
+}
+.dim{
+    display: none !important;
+    @include tablet{
+        display: flex !important;
+        z-index: 150 !important;
+    }
+    @include mobile{
+        display: flex !important;
+        z-index: 150 !important;
+    }
 }

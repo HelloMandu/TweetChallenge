@@ -8,6 +8,7 @@ const upload = require("./middleware/upload");
 const omissionChecker = require("../lib/omissionChecker");
 
 const User = require("../schemas/user");
+const Challenge = require("../schemas/challenge");
 
 /*CREATE*/
 router.post("/", upload.single("profile"), async (req, res) => {
@@ -27,15 +28,15 @@ router.post("/", upload.single("profile"), async (req, res) => {
         if (existUser) {
             return res.status(202).send({ msg: "이미 가입한 이메일입니다." });
         }
-        const hashedPassoword = await bcrypt.hash(password, 12);
-        if (!hashedPassoword) {
+        const hashedPassword = await bcrypt.hash(password, 12);
+        if (!hashedPassword) {
             return res
                 .status(202)
                 .send({ msg: "비밀번호를 설정하지 못했습니다." });
         }
         const newUser = new User({
             email,
-            password: hashedPassoword,
+            password: hashedPassword,
             name,
             birth: new Date(birth),
             profile,
@@ -50,7 +51,7 @@ router.post("/", upload.single("profile"), async (req, res) => {
     }
 });
 
-/*Read*/
+/*myinfo*/
 router.get("/", verifyToken, async (req, res) => {
     const { _id } = req.decodeToken;
     try {
@@ -58,17 +59,18 @@ router.get("/", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
+        const challenges = await Challenge.find({ user:_id }).exec();
         const { email, name, birth, profile } = user;
         res.status(200).json({
             msg: "success",
-            user: { email, name, birth, profile },
+            user: { email, name, birth, profile, challenges },
         });
     } catch (e) {
         res.status(500).send(e);
     }
 });
 
-/*Read*/
+/*update*/
 router.put("/", verifyToken, async (req, res) => {
     const { _id } = req.decodeToken;
     try {

@@ -9,6 +9,7 @@ import { requestPostSignin } from "../../api/user";
 import useNotistack from "../../hooks/useNotistack";
 
 import Signin from "../../components/auth/Signin";
+import AuthWrapper from "../../components/auth/AuthWrapper";
 
 const SigninContainer: React.FC = () => {
     const history = useHistory();
@@ -40,7 +41,11 @@ const SigninContainer: React.FC = () => {
             history.replace(Path.main.index);
         }
     }, [JWT_TOKEN, history]);
-    return <Signin handleSignin={handleSignin} />;
+    return (
+        <AuthWrapper>
+            <Signin handleSignin={handleSignin} />
+        </AuthWrapper>
+    );
 };
 
 export default SigninContainer;

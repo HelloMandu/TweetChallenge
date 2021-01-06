@@ -1,0 +1,63 @@
+@import "../../static/stylesheets/variables";
+@import "../../static/stylesheets/mixin";
+
+.challenge-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto, minmax(100px, auto));
+    gap: 24px;
+    .challenge-item {
+        display: inline-block;
+        width: 100%;
+        box-shadow: $box-shadow;
+        .challenge-profile-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            .challenge-profile {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .challenge-title-wrapper {
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: $font-size-16px;
+            .challenge-title {
+                font-weight: bold;
+                text-align: right;
+            }
+        }
+        .challenge-date-wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            font-size: $font-size-16px;
+            .challenge-date {
+                display: flex;
+            }
+        }
+        &:hover {
+            .challenge-profile {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+@include notebook {
+    .challenge-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@include tablet {
+    .challenge-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@include mobile {
+    .challenge-list {
+        grid-template-columns: 1fr;
+    }
+}

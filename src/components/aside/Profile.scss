@@ -4,6 +4,9 @@
 .profile-wrapper{
     width: $aside-width;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .profile {
         display: flex;
         flex-direction: column;
@@ -11,6 +14,7 @@
         width: 100%;
         padding: 16px 24px;
         border-radius: 15px;
+        margin-bottom: 16px;
         @include mouseHover();
         img {
             width: 160px;
@@ -30,6 +34,20 @@
         }
         .email {
             text-align: center;
+        }
+    }
+    .aside-logout{
+        margin: 0 auto;
+        width: 70%;
+        height: 32px;
+        font-size: $font-size-16px;
+        font-weight: bold;
+        background-color: $main-color;
+        color: #fff;
+        border-radius: $border-radius-15px;
+        transition: box-shadow .15s ease-in-out;
+        &:hover{
+            box-shadow: $box-shadow;
         }
     }
 }

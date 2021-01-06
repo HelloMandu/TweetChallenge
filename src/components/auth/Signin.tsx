@@ -6,7 +6,6 @@ import useNotistack from "../../hooks/useNotistack";
 
 import Path from "../../path";
 
-import AuthWrapper from "./AuthWrapper";
 import InputBox from "../inputBox/InputBox";
 import BasicButton from "../button/BasicButton";
 
@@ -59,42 +58,40 @@ const Signin: React.FC<SigninProps> = ({ handleSignin }) => {
         [onClickLogin]
     );
     return (
-        <AuthWrapper title={"TweetChallenge"}>
-            <form className="signin-wrapper">
-                <InputBox
-                    type={"email"}
-                    name={"email"}
-                    value={email}
-                    placeholder={"이메일"}
-                    onChange={onChangeForm}
-                    onKeyDown={onKeyDownLogin}
-                    ref={emailFocus}
-                />
-                <InputBox
-                    type={"password"}
-                    name={"password"}
-                    value={password}
-                    placeholder={"비밀번호"}
-                    onChange={onChangeForm}
-                    onKeyDown={onKeyDownLogin}
-                    ref={passwordFocus}
-                />
-                <BasicButton
-                    title={"로그인"}
-                    onClick={onClickLogin}
-                    ref={loginFocus}
-                />
-                <div className={"underline"} />
-                <div className="signup-button">
-                    <Link to={Path.auth.register}>
-                        <BasicButton
-                            className={"register"}
-                            title={"새 계정 만들기"}
-                        />
-                    </Link>
-                </div>
-            </form>
-        </AuthWrapper>
+        <form className="signin-wrapper">
+            <InputBox
+                type={"email"}
+                name={"email"}
+                value={email}
+                placeholder={"이메일"}
+                onChange={onChangeForm}
+                onKeyDown={onKeyDownLogin}
+                ref={emailFocus}
+            />
+            <InputBox
+                type={"password"}
+                name={"password"}
+                value={password}
+                placeholder={"비밀번호"}
+                onChange={onChangeForm}
+                onKeyDown={onKeyDownLogin}
+                ref={passwordFocus}
+            />
+            <BasicButton
+                title={"로그인"}
+                onClick={onClickLogin}
+                ref={loginFocus}
+            />
+            <div className={"underline"} />
+            <div className="signup-button">
+                <Link to={Path.auth.signup}>
+                    <BasicButton
+                        className={"register"}
+                        title={"새 계정 만들기"}
+                    />
+                </Link>
+            </div>
+        </form>
     );
 };
 
