@@ -10,7 +10,7 @@ const Challenge = require("../schemas/challenge");
 
 /*CREATE*/
 router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
-    const { title, kind, start, end, verifyStart, verifyEnd } = req.body;
+    const { title, kind, start, end, verifyStart, verifyEnd, description } = req.body;
     const omissionResult = omissionChecker({
         title,
         kind,
@@ -18,6 +18,7 @@ router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
         end,
         verifyStart,
         verifyEnd,
+        description
     });
     if (!omissionResult.result) {
         return res.status(202).send({ msg: omissionResult.message });
@@ -30,6 +31,7 @@ router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
         const newChallenge = new Challenge({
             title,
             kind,
+            description,
             profile: req.file.path,
             start: new Date(start),
             end: new Date(end),
@@ -99,6 +101,25 @@ router.get("/", async (req, res) => {
         }
         const challenges = await Challenge.find().skip(parseInt(offset)).limit(12).exec();
         res.status(200).json({ msg: "success", challenges });
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    const omissionResult = omissionChecker({
+        id,
+    });
+    if (!omissionResult.result) {
+        return res.status(202).send({ msg: omissionResult.message });
+    }
+    try {
+        const challenge = await Challenge.findById(id).exec();
+        if(!challenge){
+            return res.status(200).json({ msg: "존재하지 않는 Challenge입니다" });
+        }
+        res.status(200).json({ msg: "success", challenge });
     } catch (e) {
         res.status(500).send(e);
     }

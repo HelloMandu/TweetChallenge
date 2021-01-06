@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// const init = require('../lib/init');
+const init = require('../lib/init');
 
 module.exports = () => {
     const connect = () => {
@@ -19,11 +19,11 @@ module.exports = () => {
                 }
             }
         );
-        // try{
-        //     init(); //default data
-        // } catch(e){
-        //     console.error(e)
-        // }
+        try{
+            // init(); //default data
+        } catch(e){
+            console.error(e)
+        }
     };
     connect();
     mongoose.connection.on("error", (error) => {

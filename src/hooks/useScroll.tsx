@@ -8,7 +8,7 @@ export const useScrollEnd = (callback: () => void, dom?: any) => {
                   window.innerHeight +
                       document.documentElement.scrollTop -
                       document.documentElement.scrollHeight
-              ) < 5;
+              ) < 10;
         if (endPoint) {
             callback();
         }

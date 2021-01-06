@@ -1,0 +1,28 @@
+@import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
+
+.myinfo-wrapper{
+    max-width: $breakpoint-notebook;
+    margin: 0 auto;
+    border: $standard-border;
+    border-radius: $border-radius-6px;
+    .profile-wrapper{
+        width: 100%;
+        img{
+            display: block;
+            margin: 0 auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+        }
+    }
+    .info{
+        display: flex;
+        padding: 16px 24px;
+        justify-content: space-between;
+        width: 100%;
+        border-top: $standard-border;
+        font-size: $font-size-16px;
+        @include mouseHover();
+    }
+}
