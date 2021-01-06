@@ -8,6 +8,7 @@ module.exports = () => {
         mongoose.connect(
             process.env.MONGO_URI,
             {
+                useNewUrlParser: true,
                 dbName: "tweet-challenge",
             },
             (error) => {
