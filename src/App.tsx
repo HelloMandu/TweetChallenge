@@ -9,6 +9,7 @@ import HeaderContainer from "./container/HeaderContainer";
 import AsideContainer from "./container/AsideContainer";
 import MainContainer from "./pages/MainContainer";
 import DetailContainer from "./pages/challenge/DetailContainer";
+import EnrollContainer from "./pages/challenge/EnrollContainer";
 import AuthContainer from "./pages/auth/AuthContainer";
 
 import "./App.scss";
@@ -37,6 +38,7 @@ const App: React.FC = () => {
                         path={Path.main.detail + '/:id?'}
                         component={DetailContainer}
                     />
+                    <Route path={Path.main.enroll} component={EnrollContainer} />
                     <Route path={Path.auth.index} component={AuthContainer} />
                     <Route component={() => <Redirect to="/" />} />
                 </Switch>

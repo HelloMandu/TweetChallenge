@@ -4,6 +4,7 @@ const Path: any = {
     main: {
         index: '/',
         detail: '/detail',
+        enroll: '/enroll',
     },
     auth: {
         index: '/auth',

@@ -25,3 +25,33 @@ export const getDayOptions = (): number[] => {
     }
     return days;
 }
+
+export const getHourOptions = (): string[] => {
+    const hours: string[] = [];
+    const LIMIT: number = 24;
+    for (let i = 0; i < LIMIT; i++) {
+        if (i < 10) {
+            let digit = `0${i}`;
+            hours.push(digit);
+        }
+        else {
+            hours.push(i.toString());
+        }
+    }
+    return hours;
+}
+
+export const getMinuteOptions = (): string[] => {
+    const minutes: string[] = [];
+    const LIMIT: number = 60;
+    for (let i = 0; i < LIMIT; i++) {
+        if (i < 10) {
+            let digit = `0${i}`;
+            minutes.push(digit);
+        }
+        else {
+            minutes.push(i.toString());
+        }
+    }
+    return minutes;
+}
