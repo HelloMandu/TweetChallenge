@@ -4,7 +4,7 @@ import { ButtonBase } from "@material-ui/core";
 import moment from "moment";
 import "moment/locale/ko";
 
-import { ChallengeState } from "../../pages/MainContainer";
+import { ChallengeState } from "../../container/MainContainer";
 import LazyImage from "../lazyImage/LazyImage";
 
 import Path, { API_SERVER } from "../../path";

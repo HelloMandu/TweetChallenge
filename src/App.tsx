@@ -7,12 +7,11 @@ import { useLogin } from './hooks/useAuth';
 
 import HeaderContainer from './container/HeaderContainer';
 import AsideContainer from './container/AsideContainer';
-import MainContainer from './pages/MainContainer';
-import DetailContainer from './pages/challenge/DetailContainer';
-import AuthContainer from './pages/auth/AuthContainer';
-
-import './App.scss';
+import MainContainer from './container/MainContainer';
+import DetailContainer from './container/challenge/DetailContainer';
+import AuthContainer from './container/auth/AuthContainer';
 import DialogContainer from './container/DialogContainer';
+import './App.scss';
 
 const App: React.FC = () => {
     const handleLogin = useLogin();
