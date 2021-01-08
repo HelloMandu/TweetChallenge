@@ -5,6 +5,8 @@ import "moment/locale/ko";
 import { API_SERVER } from "../../path";
 import { UserState } from "../../store/user";
 
+import './MyInfo.scss'
+
 interface MyInfoProps {
     user: UserState;
 }

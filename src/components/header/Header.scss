@@ -1,5 +1,5 @@
-@import "../../static/stylesheets/variables";
-@import "../../static/stylesheets/mixin";
+@import '../../static/stylesheets/variables';
+@import '../../static/stylesheets/mixin';
 
 .header {
     position: fixed;
@@ -25,38 +25,85 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        .my-link {
-            height: 100%;
+        .my-link-wrapper {
             padding: 4px 8px;
-            border-radius: $border-radius-15px;
-            @include mouseHover();
-            .my-image {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                margin-right: 8px;
+            .my-link {
+                height: 100%;
+                border-radius: $border-radius-15px;
+                @include mouseHover();
+                .my-image {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                }
+                .my-name {
+                    color: #222;
+                    font-weight: bold;
+                    font-size: $font-size-16px;
+                }
+                @include tablet {
+                    .my-name {
+                        display: none;
+                    }
+                    .my-image {
+                        margin-right: 0px;
+                    }
+                }
+                @include mobile {
+                    .my-name {
+                        display: none;
+                    }
+                    .my-image {
+                        margin-right: 0px;
+                    }
+                }
             }
-            .my-name {
-                color: #222;
-                font-weight: bold;
+
+            .my-link-tooltip {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                top: 65px;
+                right: 16px;
+                height: 60px;
                 font-size: $font-size-16px;
+                font-weight: bold;
+                background-color: $color-222;
+                opacity: 0;
+                color: #fff;
+                pointer-events: none;
+                transition: opacity .15s ease-in-out;
+                &::after {
+                    content: ' ';
+                    position: absolute;
+                    top: -30%;
+                    left: 50%;
+                    margin-left: -10px;
+                    border-width: 10px;
+                    border-style: solid;
+                    border-color: transparent transparent $color-222 transparent;
+                }
+                .tooltip-button {
+                    padding: 4px 8px;
+                    font-weight: bold;
+                    transition: color .15s ease-in-out;
+                    &:hover{
+                        color: $color-999;
+                    }
+                }
+            }
+            &:hover{
+                .my-link-tooltip{
+                    opacity: 1;
+                    pointer-events: auto;
+                }
 
             }
-            @include tablet {
-                .my-name{
-                    display: none;
-                }
-                .my-image{
-                    margin-right: 0px;
-                }
-            }
-            @include mobile {
-                .my-name{
-                    display: none;
-                }
-                .my-image{
-                    margin-right: 0px;
-                }
+            .clicked {
+                opacity: 1;
+                pointer-events: auto;
             }
         }
         .auth-link {
@@ -72,17 +119,17 @@
                 font-weight: bold;
                 @include mouseHover();
             }
-            @include mobile{
-                .register-link{
+            @include mobile {
+                .register-link {
                     display: none;
                 }
             }
         }
     }
-    @include tablet{
+    @include tablet {
         padding: 0 8px;
     }
-    @include mobile{
+    @include mobile {
         padding: 0 8px;
     }
 }

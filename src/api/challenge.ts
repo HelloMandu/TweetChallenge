@@ -8,6 +8,12 @@ export const requestGetChallenges = async (offset: number) => {
     return response.data;
 }
 
+export const requestGetChallengeDetail = async (id: string) => {
+    const URL = Path.api + '/challenge/' + id;
+    const response = await axios.get(URL);
+    return response.data;
+}
+
 export const requestPostEnroll = async (JWT_TOKEN: string, title: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File) => {
     const URL = Path.api + '/challenge';
     const options = {

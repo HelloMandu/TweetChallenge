@@ -1,8 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import cn from "classnames";
 
-// import placehoder from '../../static/asset/placeholder.png';
-
+import { API_SERVER } from "../../path";
 import "./LazeImage.scss";
 
 interface LazyImageProps {
@@ -41,7 +40,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
         <img
             className={cn("lazy-image", className, { isLoad })}
             src={
-                isLoad ? src : `${process.env.PUBLIC_URL + "placeholder.jpg"}`
+                isLoad ? src : `${API_SERVER}/images/placeholder.jpg`
             }
             ref={imgRef}
             alt={alt}
