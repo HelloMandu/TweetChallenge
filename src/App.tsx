@@ -3,21 +3,13 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Path from './path';
 
-<<<<<<< HEAD
-import HeaderContainer from "./container/HeaderContainer";
-import AsideContainer from "./container/AsideContainer";
-import MainContainer from "./pages/MainContainer";
-import DetailContainer from "./pages/challenge/DetailContainer";
-import EnrollContainer from "./pages/challenge/EnrollContainer";
-import AuthContainer from "./pages/auth/AuthContainer";
-=======
 import { useLogin } from './hooks/useAuth';
->>>>>>> master
 
 import HeaderContainer from './container/HeaderContainer';
 import AsideContainer from './container/AsideContainer';
 import MainContainer from './container/MainContainer';
 import DetailContainer from './container/challenge/DetailContainer';
+import EnrollContainer from "./container/challenge/EnrollContainer";
 import AuthContainer from './container/auth/AuthContainer';
 import DialogContainer from './container/DialogContainer';
 import './App.scss';
