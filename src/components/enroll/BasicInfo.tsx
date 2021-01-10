@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import cn from "classnames";
 import { ButtonBase } from '@material-ui/core';
 
 import useInput from '../../hooks/useInput';
@@ -8,7 +9,6 @@ import DatePicker from '../datepicker/DatePicker';
 import InputBox from '../inputBox/InputBox';
 import TimePicker from '../timepicker/TimePicker';
 
-import { API_SERVER } from '../../path';
 import './BasicInfo.scss';
 
 interface BasicInfoProps {
@@ -43,11 +43,11 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
     }, [profile]);
     useEffect(() => textRef.current?.focus(), []);
 
-    // keydown, onClick, api 호출, 디자인
+    // 함수 호출, onClick
 
     return (
-        <article>
-            <section>
+        <main className='enroll-main'>
+            <section className='enroll-section'>
                 <h3>제목</h3>
                 <InputBox
                     type={"text"}
@@ -58,7 +58,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     ref={textRef}
                 />
             </section>
-            <section>
+            <section className='enroll-section'>
                 <h3>종류</h3>
                 <InputBox
                     type={"text"}
@@ -68,27 +68,27 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     onChange={onChangeForm}
                 />
             </section>
-            <section>
-                <div>
+            <article className='enroll-section'>
+                <section className='enroll-section'>
                     <h3>시작</h3>
                     <DatePicker date={start} onChange={onChangeStart} />
-                </div>
-                <div>
+                </section>
+                <section className='enroll-section'>
                     <h3>종료</h3>
                     <DatePicker date={end} onChange={onChangeEnd} />
-                </div>
-            </section>
-            <section>
-                <div>
+                </section>
+            </article>
+            <article className='enroll-section'>
+                <section className='enroll-section'>
                     <h3>시작시간</h3>
                     <TimePicker time={verifyStart} onChange={onChangeVerifyStart} />
-                </div>
-                <div>
+                </section>
+                <section className='enroll-section'>
                     <h3>종료시간</h3>
                     <TimePicker time={verifyEnd} onChange={onChangeVerifyEnd} />
-                </div>
-            </section>
-            <section>
+                </section>
+            </article>
+            <section className={cn('enroll-section', 'last-section')}>
                 <h3>대표사진</h3>
                 <ButtonBase className="enroll-profile-button">
                     <label htmlFor="file-setter">
@@ -105,17 +105,18 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     onChange={onChangeProfile}
                     accept="image/gif, image/jpeg, image/png, image/svg"
                 />
-                <label className="upload-profile-image" htmlFor="file-setter">
-                    {/* default 이미지 뭐 할지 몰라서 그냥 프로필사진으로 함 */}
-                    <img
-                        className={"profile-image"}
-                        src={imgFile ? imgFile : `${API_SERVER}/images/profile.png`}
-                        alt="profile"
-                    />
-                </label>
+                {imgFile &&
+                    <label className="upload-profile-image" htmlFor="file-setter">
+                        <img
+                            className={"profile-image"}
+                            src={imgFile}
+                            alt="profile"
+                        />
+                    </label>
+                }
             </section>
             <BasicButton title={"등록"} />
-        </article >
+        </main >
     );
 };
 

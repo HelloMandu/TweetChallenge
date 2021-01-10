@@ -27,7 +27,7 @@ const EnrollContainer: React.FC = () => {
         profile: File | null,
     ) => {
         try {
-
+            // api 통신
         } catch (e) {
 
         }
