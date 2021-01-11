@@ -3,6 +3,7 @@ import cn from "classnames";
 import { ButtonBase } from '@material-ui/core';
 
 import useInput from '../../hooks/useInput';
+import useNotistack from '../../hooks/useNotistack';
 
 import BasicButton from '../button/BasicButton';
 import DatePicker from '../datepicker/DatePicker';
@@ -10,21 +11,27 @@ import InputBox from '../inputBox/InputBox';
 import TimePicker from '../timepicker/TimePicker';
 
 import './BasicInfo.scss';
+import { useHistory } from 'react-router-dom';
+import Path from '../../path';
 
 interface BasicInfoProps {
-    handleEnroll: (title: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File | null) => Promise<void>;
+    handleEnroll: (JWT_TOKEN: string, description: string, title: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File) => Promise<void>;
 }
 
 const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
 
-    const [form, onChangeForm] = useInput({ title: "", kind: "" });
-    const { title, kind } = form;
+    const [form, onChangeForm] = useInput({ title: "", kind: "", description: "" });
+    const { title, description, kind } = form;
     const [start, onChangeStart] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
     const [end, onChangeEnd] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
     const [verifyStart, onChangeVerifyStart] = useInput({ hour: 0, minute: 0, });
     const [verifyEnd, onChangeVerifyEnd] = useInput({ hour: 0, minute: 0, });
 
-    const textRef = useRef<HTMLInputElement>(null);
+    const handleNotistack = useNotistack();
+
+    const titleRef = useRef<HTMLInputElement>(null);
+    const kindRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLInputElement>(null);
 
     const [profile, setProfile] = useState<File | null>(null);
     const onChangeProfile = useCallback((e) => setProfile(e.target.files[0]), []);
@@ -41,7 +48,50 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
             reader.readAsDataURL(profile);
         }
     }, [profile]);
-    useEffect(() => textRef.current?.focus(), []);
+    useEffect(() => titleRef.current?.focus(), []);
+
+    const history = useHistory();
+
+    const JWT_TOKEN = sessionStorage.getItem('user');
+    useEffect(() => {
+        if (!JWT_TOKEN) {
+            history.replace(Path.main.index);
+        }
+    }, [JWT_TOKEN, history]);
+
+    const onClickEnroll = useCallback(() => {
+        if (title === '') {
+            handleNotistack("제목을 입력해주세요.", 'info');
+            titleRef.current?.focus();
+            return;
+        } else if (description === '') {
+            handleNotistack("설명을 입력해주세요.", 'info');
+            description.current?.focus();
+            return;
+        } else if (kind === '') {
+            handleNotistack("종류를 입력해주세요.", 'info');
+            kindRef.current?.focus();
+            return;
+        } else if (!profile) {
+            handleNotistack("대표사진을 입력해주세요", "info");
+            return;
+        }
+        const { year: start_year, month: start_month, day: start_day } = start;
+        const { year: end_year, month: end_month, day: end_day } = end;
+        const { hour: start_hour, minute: start_minute } = verifyStart;
+        const { hour: end_hour, minute: end_minute } = verifyEnd;
+        handleEnroll(
+            JWT_TOKEN!,
+            title,
+            description,
+            kind,
+            new Date(`${start_year}/${start_month}/${start_day}`),
+            new Date(`${end_year}/${end_month}/${end_day}`),
+            new Date(`${start_year}/${start_month}/${start_day} ${start_hour}:${start_minute}`),
+            new Date(`${end_year}/${end_month}/${end_day} ${end_hour}:${end_minute}`),
+            profile
+        );
+    }, [handleEnroll, handleNotistack, JWT_TOKEN, title, description, kind, start, end, verifyStart, verifyEnd, profile]);
 
     // 함수 호출, onClick
 
@@ -55,7 +105,18 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     value={title}
                     placeholder={"제목"}
                     onChange={onChangeForm}
-                    ref={textRef}
+                    ref={titleRef}
+                />
+            </section>
+            <section className='enroll-section'>
+                <h3>설명</h3>
+                <InputBox
+                    type={"text"}
+                    name={"description"}
+                    value={description}
+                    placeholder={"설명"}
+                    onChange={onChangeForm}
+                    ref={descriptionRef}
                 />
             </section>
             <section className='enroll-section'>
@@ -66,6 +127,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     value={kind}
                     placeholder={"종류"}
                     onChange={onChangeForm}
+                    ref={kindRef}
                 />
             </section>
             <article className='enroll-section'>
@@ -115,7 +177,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     </label>
                 }
             </section>
-            <BasicButton title={"등록"} />
+            <BasicButton title={"등록"} onClick={onClickEnroll} />
         </main >
     );
 };

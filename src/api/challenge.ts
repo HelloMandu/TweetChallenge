@@ -14,7 +14,7 @@ export const requestGetChallengeDetail = async (id: string) => {
     return response.data;
 }
 
-export const requestPostEnroll = async (JWT_TOKEN: string, title: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File) => {
+export const requestPostEnroll = async (JWT_TOKEN: string, title: string, description: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File) => {
     const URL = Path.api + '/challenge';
     const options = {
         headers: {
@@ -22,7 +22,7 @@ export const requestPostEnroll = async (JWT_TOKEN: string, title: string, kind: 
         }
     }
     const formData = makeFormData({
-        title, kind, start, end, verifyStart, verifyEnd, profile
+        title, description, kind, start, end, verifyStart, verifyEnd, profile
     });
     const response = await axios.post(URL, formData, options);
     return response.data;

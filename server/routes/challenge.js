@@ -11,6 +11,7 @@ const Challenge = require("../schemas/challenge");
 /*CREATE*/
 router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
     const { title, kind, start, end, verifyStart, verifyEnd, description } = req.body;
+    console.log(req.body);
     const omissionResult = omissionChecker({
         title,
         kind,
@@ -96,7 +97,7 @@ router.get("/", async (req, res) => {
     }
     try {
         const count = await Challenge.count();
-        if(offset >= count){
+        if (offset >= count) {
             return res.status(200).json({ msg: "finish" });
         }
         const challenges = await Challenge.find().skip(parseInt(offset)).limit(12).exec();
@@ -116,7 +117,7 @@ router.get("/:id", async (req, res) => {
     }
     try {
         const challenge = await Challenge.findById(id).exec();
-        if(!challenge){
+        if (!challenge) {
             return res.status(200).json({ msg: "존재하지 않는 Challenge입니다" });
         }
         res.status(200).json({ msg: "success", challenge });
