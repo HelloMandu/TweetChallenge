@@ -20,14 +20,15 @@ interface BasicInfoProps {
 
 const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
 
+    const history = useHistory();
+    const handleNotistack = useNotistack();
+
     const [form, onChangeForm] = useInput({ title: "", kind: "", description: "" });
     const { title, description, kind } = form;
     const [start, onChangeStart] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
     const [end, onChangeEnd] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
     const [verifyStart, onChangeVerifyStart] = useInput({ hour: 0, minute: 0, });
     const [verifyEnd, onChangeVerifyEnd] = useInput({ hour: 0, minute: 0, });
-
-    const handleNotistack = useNotistack();
 
     const titleRef = useRef<HTMLInputElement>(null);
     const kindRef = useRef<HTMLInputElement>(null);
@@ -50,7 +51,6 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
     }, [profile]);
     useEffect(() => titleRef.current?.focus(), []);
 
-    const history = useHistory();
 
     const JWT_TOKEN = sessionStorage.getItem('user');
     useEffect(() => {

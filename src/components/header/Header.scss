@@ -67,7 +67,7 @@
                 justify-content: space-around;
                 top: 65px;
                 right: 16px;
-                height: 60px;
+                height: 80px;
                 font-size: $font-size-16px;
                 font-weight: bold;
                 background-color: $color-222;
@@ -75,10 +75,16 @@
                 color: #fff;
                 pointer-events: none;
                 transition: opacity .15s ease-in-out;
+                @include tablet{
+                    right: 0;
+                }
+                @include mobile{
+                    right: 0;
+                }
                 &::after {
                     content: ' ';
                     position: absolute;
-                    top: -30%;
+                    top: -25%;
                     left: 50%;
                     margin-left: -10px;
                     border-width: 10px;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import cn from 'classnames';
 import { Link, useHistory } from 'react-router-dom';
 import { ButtonBase } from '@material-ui/core';
@@ -34,6 +34,15 @@ const AuthState: React.FC<UserStateProps> = ({ name, profile }) => {
                 <span className={'my-name'}>{name}</span>
             </ButtonBase>
             <div className={cn('my-link-tooltip', { clicked })} onBlur={() => setClicked(false)}>
+                <ButtonBase
+                    className={'tooltip-button'}
+                    onClick={() => {
+                        history.push(Path.main.enroll);
+                        setClicked(false)
+                    }}
+                >
+                    등록하기
+                </ButtonBase>
                 <ButtonBase
                     className={'tooltip-button'}
                     onClick={() => {
