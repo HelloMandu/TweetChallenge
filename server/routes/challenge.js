@@ -11,7 +11,6 @@ const Challenge = require("../schemas/challenge");
 /*CREATE*/
 router.post("/", verifyToken, upload.single("profile"), async (req, res) => {
     const { title, kind, start, end, verifyStart, verifyEnd, description } = req.body;
-    console.log(req.body);
     const omissionResult = omissionChecker({
         title,
         kind,

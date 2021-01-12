@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import BasicInfo from "../../components/enroll/BasicInfo";
 import EnrollWrapper from "../../components/enroll/EnrollWrapper";
@@ -9,8 +9,9 @@ import useNotistack from '../../hooks/useNotistack';
 import { requestPostEnroll } from "../../api/challenge";
 import Path from "../../path";
 
-const EnrollContainer: React.FC = () => {
+const EnrollContainer = () => {
 
+    const location = useLocation();
     const handleNotistack = useNotistack();
     const history = useHistory();
 
@@ -44,7 +45,7 @@ const EnrollContainer: React.FC = () => {
 
     return (
         <EnrollWrapper title="챌린지 등록">
-            <BasicInfo handleEnroll={handleEnroll} />
+            <BasicInfo handleEnroll={handleEnroll} challenge={location.state} />
         </EnrollWrapper>
     );
 };

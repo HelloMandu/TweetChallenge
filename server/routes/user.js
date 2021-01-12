@@ -59,11 +59,11 @@ router.get("/", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(202).send({ msg: "가입하지 않은 이메일입니다." });
         }
-        const challenges = await Challenge.find({ user:_id }).exec();
-        const { email, name, birth, profile } = user;
+        const challenges = await Challenge.find({ user: _id }).exec();
+        const { id, email, name, birth, profile } = user;
         res.status(200).json({
             msg: "success",
-            user: { email, name, birth, profile, challenges },
+            user: { id, email, name, birth, profile, challenges },
         });
     } catch (e) {
         res.status(500).send(e);

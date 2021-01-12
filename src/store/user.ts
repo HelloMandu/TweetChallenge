@@ -74,6 +74,7 @@ export function* userSaga() {
 };
 
 export interface UserState {
+    id: string | null,
     email: string | null,
     name: string | null,
     birth: Date | null,
@@ -82,6 +83,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
+    id: null,
     email: null,
     name: null,
     birth: null,
@@ -99,6 +101,7 @@ const user = handleActions(
             ...action.payload
         }),
         [DELETE_USER_SUCCESS]: (state: UserState, action: UserAction) => ({
+            id: null,
             email: null,
             name: null,
             birth: null,

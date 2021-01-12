@@ -18,12 +18,25 @@ interface BasicInfoProps {
     handleEnroll: (JWT_TOKEN: string, description: string, title: string, kind: string, start: Date, end: Date, verifyStart: Date, verifyEnd: Date, profile: File) => Promise<void>;
 }
 
-const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
+interface ModifyProps extends BasicInfoProps {
+    challenge?: {
+        profile: string;
+        title: string;
+        start: Date;
+        end: Date;
+        description: string;
+        verifyStart: Date;
+        verifyEnd: Date;
+        kind: string;
+    } | any;
+}
+
+const BasicInfo = ({ handleEnroll, challenge }: ModifyProps) => {
 
     const history = useHistory();
     const handleNotistack = useNotistack();
 
-    const [form, onChangeForm] = useInput({ title: "", kind: "", description: "" });
+    const [form, onChangeForm] = useInput({ title: "", description: "", kind: "" });
     const { title, description, kind } = form;
     const [start, onChangeStart] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
     const [end, onChangeEnd] = useInput({ year: new Date().getFullYear(), month: 1, day: 1, });
@@ -51,7 +64,6 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
     }, [profile]);
     useEffect(() => titleRef.current?.focus(), []);
 
-
     const JWT_TOKEN = sessionStorage.getItem('user');
     useEffect(() => {
         if (!JWT_TOKEN) {
@@ -59,6 +71,12 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
         }
     }, [JWT_TOKEN, history]);
 
+    const [defaultData, setDefaultData] = useState<ModifyProps | any>('');
+    useEffect(() => {
+        if (challenge) {
+            setDefaultData(challenge);
+        }
+    }, [challenge])
     const onClickEnroll = useCallback(() => {
         if (title === '') {
             handleNotistack("제목을 입력해주세요.", 'info');
@@ -93,8 +111,6 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
         );
     }, [handleEnroll, handleNotistack, JWT_TOKEN, title, description, kind, start, end, verifyStart, verifyEnd, profile]);
 
-    // 함수 호출, onClick
-
     return (
         <main className='enroll-main'>
             <section className='enroll-section'>
@@ -103,7 +119,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     type={"text"}
                     name={"title"}
                     value={title}
-                    placeholder={"제목"}
+                    placeholder={defaultData.title && defaultData.title}
                     onChange={onChangeForm}
                     ref={titleRef}
                 />
@@ -114,7 +130,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     type={"text"}
                     name={"description"}
                     value={description}
-                    placeholder={"설명"}
+                    placeholder={defaultData.description && defaultData.description}
                     onChange={onChangeForm}
                     ref={descriptionRef}
                 />
@@ -125,7 +141,7 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
                     type={"text"}
                     name={"kind"}
                     value={kind}
-                    placeholder={"종류"}
+                    placeholder={defaultData.kind && defaultData.kind}
                     onChange={onChangeForm}
                     ref={kindRef}
                 />
@@ -133,11 +149,11 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ handleEnroll }) => {
             <article className='enroll-section'>
                 <section className='enroll-section'>
                     <h3>시작</h3>
-                    <DatePicker date={start} onChange={onChangeStart} />
+                    <DatePicker date={defaultData.start && defaultData.start} onChange={onChangeStart} />
                 </section>
                 <section className='enroll-section'>
                     <h3>종료</h3>
-                    <DatePicker date={end} onChange={onChangeEnd} />
+                    <DatePicker date={defaultData.end && defaultData.end} onChange={onChangeEnd} />
                 </section>
             </article>
             <article className='enroll-section'>

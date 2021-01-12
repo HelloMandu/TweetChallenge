@@ -1,12 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/ko';
+import { Link } from 'react-router-dom';
 
-import { API_SERVER } from '../../path';
+import Path, { API_SERVER } from '../../path';
 import LazyImage from '../lazyImage/LazyImage';
 import BasicButton from '../button/BasicButton';
 
 import './Detail.scss';
+import { ButtonBase } from '@material-ui/core';
 
 export interface DetailProps {
     challenge: {
@@ -19,10 +21,12 @@ export interface DetailProps {
         verifyEnd: Date;
         kind: string;
         participate: any[];
+        user: string;
     } | null;
+    writer: boolean | null;
 }
 
-const Detail: React.FC<DetailProps> = ({ challenge }) => {
+const Detail: React.FC<DetailProps> = ({ challenge, writer }) => {
     if (!challenge) {
         return <h1>스켈레톤</h1>;
     }
@@ -37,6 +41,7 @@ const Detail: React.FC<DetailProps> = ({ challenge }) => {
         kind,
         participate,
     } = challenge;
+    // 새로고침시 수정
     return (
         <>
             <section className="detail-content">
@@ -76,6 +81,13 @@ const Detail: React.FC<DetailProps> = ({ challenge }) => {
             <div className="participate-button-wrapper">
                 <BasicButton title="참가하기"></BasicButton>
             </div>
+            {writer &&
+                <Link to={{ pathname: Path.main.enroll, state: challenge }} className="participate-button-wrapper">
+                    <ButtonBase component="div" className="modify-button" >
+                        <div>수정하기</div>
+                    </ButtonBase>
+                </Link>
+            }
         </>
     );
 };
