@@ -5,13 +5,13 @@ import { startLoading, finishLoading } from "../store/loading";
 
 const useLoading = (
     type?: any
-): [boolean | boolean[], () => Action<string>, () => Action<string>] => {
+): [() => Action<string>, () => Action<string>, boolean | boolean[]] => {
     const loading = useSelector((state: RootState) => state.loading);
     const isLoading = type ? loading[type] : loading;
     const dispatch = useDispatch();
     const onLoading = () => dispatch(startLoading(type));
     const offLoading = () => dispatch(finishLoading(type));
-    return [isLoading, onLoading, offLoading];
+    return [onLoading, offLoading, isLoading];
 };
 
 export default useLoading;

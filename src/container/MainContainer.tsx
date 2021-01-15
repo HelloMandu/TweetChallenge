@@ -25,7 +25,7 @@ const LIMIT: number = 12;
 const MainContainer: React.FC = () => {
     const handleSnackbar = useNotistack();
     const [mounted, setMounted] = useState<boolean>(false);
-    const [isLoading, onLoading, offLoading] = useLoading('main');
+    const [onLoading, offLoading] = useLoading('main');
     const offset = useRef<number>(0);
     const [challenges, setChallenges] = useState<ChallengeState[]>([]);
     const isFinish = useRef<boolean>(false);
